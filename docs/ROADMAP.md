@@ -30,22 +30,15 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 **G-DOC:** **PASS** — [`phase0_gate_status.md`](phase0_gate_status.md)
 
-**Deliverables (this session class):**
+**Deliverables (G-PROTO — elite prototype package):**
 
-- Draft laser safety case (no NHZ distances approved)
-- Draft bench SOP (unsigned)
-- LSO assignment template
-- Zero-order inspection checklist
-- Procurement status tracker (all SPEC)
-- Analytical T-02 pre-check ([`analysis/prebench_t02_analytical_report.md`](../analysis/prebench_t02_analytical_report.md))
+- CONOPS, export screening, requirements traceability matrix
+- Electrical architecture, mechanical BOM, firmware pulse controller design
+- Analysis: thermal_pulse_model, vibration_wander_model (+ existing link budgets)
+- Detailed T-01–T-05 procedures and test record templates
+- Master handoff: [`ELITE_PROTOTYPE_HANDOFF.md`](ELITE_PROTOTYPE_HANDOFF.md)
 
-**Blocked until human/hardware gates:**
-
-- G-SAF-01/02/03 — named LSO + signatures
-- G-HW-P0 — P0 hardware received
-- G-ENR — first laser energization above LSO alignment ceiling
-
-**Phase 0 bench tests T-01–T-05:** **Not started** (require G-ENR).
+**Blocked until human/hardware gates:** G-SAF-01/02/03, G-HW-P0, G-ENR, T-01–T-05 execution.
 
 ---
 

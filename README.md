@@ -26,7 +26,7 @@
 
 ## Current status
 
-**Maturity:** Phase 0 — G-DOC pass; G-ENR blocked. Supporting evidence: safety case draft, SOP draft, gate tracker, analytical pre-check. **No LSO approval, no hardware, no bench tests executed.**
+**Maturity:** Phase 0 — **Elite prototype package complete (G-PROTO PASS).** G-ENR blocked. Supporting evidence: full design, test, traceability, and analysis artifacts in [`ELITE_PROTOTYPE_HANDOFF.md`](docs/ELITE_PROTOTYPE_HANDOFF.md). **No LSO approval, no hardware energized, no bench tests executed.**
 
 ---
 
@@ -34,10 +34,11 @@
 
 | Path | Contents |
 |------|----------|
-| [`docs/`](docs/) | Architecture, requirements, risks, roadmap, [gate status](docs/phase0_gate_status.md), [safety case draft](docs/phase0_safety_case_draft.md) |
-| [`analysis/`](analysis/) | First-order power/thermal script, beam propagation notes, [940 nm link budget notes](analysis/nir_940nm_link_budget_notes.md) |
-| [`hardware/`](hardware/) | Interface spec; [candidate components](hardware/candidate_components.md); [procurement list](hardware/phase0_procurement_list.md); [optical layout](hardware/preliminary_optical_layout.md); [pulse control](hardware/pulse_control_spec.md); [surrogate sensors](hardware/surrogate_sensor_procurement.md) |
-| [`tests/`](tests/) | Phase 0 bench test plan outline (no flight test in initial scope) |
+| [`docs/`](docs/) | [Handoff index](docs/ELITE_PROTOTYPE_HANDOFF.md), architecture, [CONOPS](docs/CONOPS.md), [traceability](docs/REQUIREMENTS_TRACEABILITY.md), [gate status](docs/phase0_gate_status.md) |
+| [`analysis/`](analysis/) | Link budget, thermal pulse, vibration wander, prebench T-02 |
+| [`hardware/`](hardware/) | Electrical, mechanical BOM, procurement, optics, pulse spec |
+| [`firmware/`](firmware/) | Pulse controller state machine design |
+| [`tests/`](tests/) | SOP, [procedures](tests/procedures/), [templates](tests/templates/) |
 
 MPL-D is used as internal shorthand only. All formal and safety documentation uses the full descriptive title.
 

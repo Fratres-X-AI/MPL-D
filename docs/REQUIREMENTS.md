@@ -1,6 +1,6 @@
 # Requirements — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Concept. Supporting evidence: Requirements derived from project objective and constraints only. No verification evidence exists.
+**Maturity:** Preliminary Design — requirements traced to verification artifacts in [`REQUIREMENTS_TRACEABILITY.md`](REQUIREMENTS_TRACEABILITY.md). **No verification evidence recorded.**
 
 MPL-D is used as internal shorthand only. All formal and safety documentation uses the full descriptive title. Requirement text below uses the full title where safety or regulatory context applies.
 

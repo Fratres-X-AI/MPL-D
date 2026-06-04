@@ -11,6 +11,7 @@
 | Gate | Description | Status | Evidence |
 |------|-------------|--------|----------|
 | **G-DOC** | Pre-energization documentation package | **PASS** | Safety case draft, SOP draft, procurement list, optical layout, analytical T-02 pre-check |
+| **G-PROTO** | Elite prototype documentation package complete | **PASS** | [`ELITE_PROTOTYPE_HANDOFF.md`](ELITE_PROTOTYPE_HANDOFF.md) — CONOPS, RTM, electrical/mechanical, firmware design, T-01–T-05 procedures, analysis toolchain |
 | **G-SAF-01** | LSO assigned | **OPEN** | [`lso_assignment_record.md`](lso_assignment_record.md) — template only; no named LSO |
 | **G-SAF-02** | NHZ analysis complete + LSO approved | **OPEN** | [`phase0_safety_case_draft.md`](phase0_safety_case_draft.md) — **DRAFT**; not approved |
 | **G-SAF-03** | Bench SOP LSO-approved | **OPEN** | [`../tests/phase0_bench_sop_draft.md`](../tests/phase0_bench_sop_draft.md) — **DRAFT** |
@@ -24,9 +25,9 @@
 ## Phase state machine
 
 ```
-Preliminary Design (closed) → Phase 0 prep (closed) → Phase 0 doc gate (PASS)
-  → Phase 0 bench execution (BLOCKED at energization until safety + hardware)
-  → Phase 0 exit (future — requires T-01–T-05 measured data)
+Preliminary Design (closed) → Phase 0 prep (closed) → Phase 0 doc gate G-DOC (PASS) → Elite prototype package G-PROTO (PASS)
+  → Phase 0 bench execution G-ENR (BLOCKED — LSO + hardware)
+  → Phase 0 exit (future — T-01–T-05 measured data)
 ```
 
 **Blunt statement:** Passing G-DOC does **not** permit full-power open-beam operation. Passing G-ENR requires human LSO approval and physical hardware — not achievable by documentation alone.
