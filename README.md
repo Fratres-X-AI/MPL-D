@@ -5,6 +5,10 @@
 **Attribution:** Fratres X AI — Defense Prototype Documentation  
 **Repository:** https://github.com/Fratres-X-AI/MPL-D (private)
 
+![Concept hero render — Drone-X with MPL-D centerline payload (not CAD, not performance-validated)](assets/hero-drone-x-mpld-render.png)
+
+*Conceptual cinematic render for documentation only. Not engineering drawing. Beam pattern and airframe geometry are illustrative.*
+
 ---
 
 ## Project definition
