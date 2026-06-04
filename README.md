@@ -35,8 +35,8 @@
 | Path | Contents |
 |------|----------|
 | [`docs/`](docs/) | Architecture, requirements, risk register, roadmap, physics basis |
-| [`analysis/`](analysis/) | First-order power/thermal script and beam propagation notes |
-| [`hardware/`](hardware/) | Host–payload interface specification (preliminary) |
+| [`analysis/`](analysis/) | First-order power/thermal script, beam propagation notes, [940 nm link budget notes](analysis/nir_940nm_link_budget_notes.md) |
+| [`hardware/`](hardware/) | Host–payload interface spec; [candidate NIR components](hardware/candidate_components.md) |
 | [`tests/`](tests/) | Phase 0 bench test plan outline (no flight test in initial scope) |
 
 MPL-D is used as internal shorthand only. All formal and safety documentation uses the full descriptive title.

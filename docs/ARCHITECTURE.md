@@ -149,14 +149,38 @@ flowchart TB
 | Fiber-coupled diode | 850–980 nm (class) | 0.5–5 W / 2–10 W pattern | Preliminary Design (component class) | IR-cut filter risk on surrogates |
 | Fiber / DPSS (1064 nm class) | ~1064 nm | 1–5 W (industrial tiers) | Preliminary Design (component class) | Fusion-stack benefit **unknown** |
 | VCSEL arrays | ~850 nm (example) | mW–W | Concept for long-range dazzle | Beam quality **unproven** |
+| **AeroDiode-class 940 nm fiber module** | 940 nm ±5 nm | **10 W CW rated** (single fiber; pulsed duty required on host) | Preliminary Design (**candidate SKU**) | Datasheet captured in `hardware/candidate_components.md`; **not procured or bench-tested** |
+
+#### NIR candidate source package (940 nm / 915 nm class — user trade input)
+
+**Maturity:** Preliminary Design — vendor datasheet parameters ingested for a compact fiber-coupled NIR path aligned with silicon sensor bands. **No procurement, no NHZ analysis, no dazzle validation at any range.**
+
+A separate trade input proposes **915–940 nm, ~10 W fiber-coupled multimode diodes** (AeroDiode 940 nm 10 W Model 2 class: 105 µm core, NA 0.22, SMA905; ~11.5 A @ 1.7 V; vendor typ η ≈ 50%) for drone-on-drone centerline mount with pulsed operation and ram-air cooling. This **does not** supersede the Phase 0 visible-default path until the three-class surrogate sensor set is tested.
+
+| Aspect | Assessment (conservative) |
+|--------|---------------------------|
+| Wavelength fit | 940 nm overlaps many silicon NIR-sensitive paths; **fails** on IR-cut filtered surrogates unless leakage path exists |
+| Power class vs prior MPL-D bound | 10 W CW **equals** prior upper planning bound for **single** channel; with DOE split (N beamlets, η_DOE ~0.75) effective per-beamlet power drops to **~1 W class** — see `analysis/nir_940nm_link_budget_notes.md` |
+| Range claims (~1000 m) | **Not certified.** Irradiance at 1000 m for θ = 1 mrad single-beam is **~0.2 W/m²** order (clear air); multi-point DOE reduces per-spot I further |
+| Collimation | Vendor COL010 class cites ~12 mm beam; **multimode** fiber — measure θ_half (planning bracket 0.5–3 mrad until data) |
+| Thermal | ~10 W dissipated at typ efficiency; ram-air scoop **concept only** — hover/low-speed VTOL may insufficient (R-THM-001) |
+| Pulse CONOPS | 0.1–3 s bursts on target lock — planning only; LSO must classify pulsed NHZ before full-power bench |
+| SWaP benchmark | LUMIBIRD ~0.5 kg dazzler module (vendor) is packaging reference only — **not** MPL-D validation |
+| Hard-kill variants | LUMIBIRD “sensor destroyer” / burn-through modes — **out of scope** (defensive sensor denial only) |
+
+**915 nm vs 940 nm:** Both available from multiple suppliers (~$475–600 class listings). Down-select requires surrogate tests on unfiltered vs IR-cut vs NIR-augmented classes — not datasheet comparison alone.
+
+**Solace / payload:** Claims of ~10 kg payload capacity for Solakair Solace are **unverified** in this repository (R-INT-001). Centerline mount without gimbal remains consistent with static-pattern architecture.
+
+Full component tables, literature caveats, pulse/thermal notes: [`hardware/candidate_components.md`](../hardware/candidate_components.md). First-order 940 nm irradiance bounds: [`analysis/nir_940nm_link_budget_notes.md`](../analysis/nir_940nm_link_budget_notes.md).
 
 #### Recommended next actions (laser source)
 
 1. **Define minimum surrogate sensor set** for Phase 0 (unfiltered CMOS, IR-cut CMOS, IR-augmented path if available) — without this, wavelength down-select is speculative.
-2. **Run parallel first-order budgets** for leading single-band candidates (532 nm DPSS vs multi-emitter green vs 850–980 nm fiber) using `analysis/power_thermal_budget.py` with **datasheet** η_wp, mass, and divergence.
-3. **Commission LSO-led hazard analysis** (IEC 60825-1 NHZ) for top two single-band architectures before procurement; include zero-order leakage if DOE is candidate.
-4. **Benchboard (bench only):** irradiance map at 1–5 m and surrogate camera saturation test — no outdoor or flight emission until regulatory approval.
-5. **Document pass/fail criteria** for visible vs NIR single-band against surrogate set; open gated dual-band or NIR-only Phase 1 trade only if visible fails defined criteria.
+2. **Obtain and bench-verify** AeroDiode-class (or alternate) 940 nm module + collimator; measure θ_half before adopting 1000 m planning scenarios.
+3. **Run parallel first-order budgets** for 532 nm DPSS+DOE vs 940 nm fiber+DOE using measured divergence and DOE efficiency — see `analysis/nir_940nm_link_budget_notes.md`.
+4. **Commission LSO-led hazard analysis** (IEC 60825-1 NHZ) for selected single-band architecture before full-power pulsed bench; NIR invisible-beam collateral is **not** lower risk than visible.
+5. **Document pass/fail criteria** against three surrogate classes; do not lock 915/940 nm single-band on vendor or paper claims alone.
 
 ---
 
