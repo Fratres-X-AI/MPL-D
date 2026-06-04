@@ -390,6 +390,49 @@ This surrogate set is the minimum required before any final single-band or dual-
 
 **Blunt constraint:** Procuring fewer than three classes, or substituting datasheet-only analysis without bench exposure, does **not** close the wavelength down-select. Military-hardened or AI-processed threat sensors remain outside this minimum set — Phase 0 results must not be extrapolated to them (R-EFF-001).
 
+### Eye Safety and Nominal Hazard Zone Analysis Requirement
+
+**Maturity:** Requirement defined at Preliminary Design level. **No NHZ analysis performed yet.** No nominal hazard zone dimensions, boundary distances, or exposure calculations appear in this repository.
+
+**Evidence basis:** IEC 60825-1 framework referenced in `docs/REQUIREMENTS.md` (REQ-S-001) and `docs/RISK_REGISTER.md` (R-EYE-001). Wavelength-dependent hazard tradeoffs are qualitative only. **No** LSO-led analysis report, **no** approved bench SOP tied to a completed hazard case, **no** measured zero-order or multi-beamlet leakage map.
+
+#### Visible-primary (532 nm class) — mandatory formal NHZ
+
+A **532 nm** (or equivalent visible-green) architecture is photopically weighted. Collateral exposure to operators, bystanders, and off-axis personnel is **high consequence** because the beam is often visible and perceived as safe until it is not. Before **any** full-power open-beam bench energization of a visible source:
+
+- A **qualified Laser Safety Officer (LSO)** shall lead a **formal IEC 60825-1 nominal hazard zone (NHZ) analysis** for the planned configuration: optical power class, pulse structure (if any), divergence per beamlet, pattern geometry, zero-order and stray-order paths (DOE if used), bench layout, and worst-case operator/bystander positions.
+- The analysis shall produce **documented** classification, NHZ boundaries, control measures, required protective eyewear (wavelength- and OD-matched), signage, beam blocks/dumps, interlocks (REQ-S-002), and written energization SOP — **before** procurement commits to full-power hardware or execution of high-irradiance surrogate tests.
+
+**No full-power bench work with visible lasers may proceed without completed and documented NHZ analysis and corresponding safety controls.**
+
+#### NIR-primary (850–1064 nm class) — NHZ still mandatory; different failure mode
+
+An **NIR-primary** path does **not** waive NHZ analysis. IEC 60825-1 exposure limits and measurement methods differ from visible-green; retinal hazard remains. Additional collateral risks apply:
+
+- **Invisible beam:** lack of visual warning increases accidental intrabeam and specular exposure risk if NHZ discipline, training, or containment fails.
+- **Eyewear and detection:** wavelength-specific protective eyewear and beam diagnostic methods differ from 532 nm bench practice; wrong eyewear is a **hard failure**, not a margin issue.
+- **Filter-dependent dazzle vs safety:** sensor denial may fail on IR-cut surrogates while eye hazard does not — do not confuse ineffective dazzle with reduced hazard.
+
+NIR and visible architectures require **separate** hazard cases if both are benched; do not reuse a 532 nm NHZ package for an 850–980 nm or 1064 nm configuration.
+
+#### Phase 0 entry criteria / readiness checklist (hard prerequisite)
+
+| Gate | Criterion | Status (this repo) |
+|------|-----------|---------------------|
+| G-SAF-01 | LSO assigned; scope of authority documented | **Not demonstrated** |
+| G-SAF-02 | IEC 60825-1 classification and **completed NHZ analysis** for the **selected** single-band architecture (visible or NIR) | **Not performed** |
+| G-SAF-03 | Written bench SOP: enable/interlock, alignment low-power protocol, emergency shutdown, eyewear, area control | **Not demonstrated** |
+| G-SAF-04 | Zero-order / stray-order containment defined and inspected if DOE is in path (REQ-S-003) | **Planning only** |
+| G-SAF-05 | Surrogate sensor set defined (minimum three classes per preceding subsection) | **Defined; not procured** |
+
+**Blunt constraint:** Low-power alignment, surrogate camera tests at reduced irradiance, and pattern photography **still** require an approved hazard framework. “We will do NHZ later” is **not** a Phase 0 plan — it is an open safety violation waiting for an incident.
+
+#### Conservative planning notes (no NHZ numbers)
+
+- Do **not** infer safe standoff distances, “safe” power levels, or duty cycles from first-order irradiance math in `docs/PHYSICS_BASIS.md` or planning tables in this document.
+- Do **not** treat diverging multi-beamlet patterns as automatically Class 1 or Class 2 at all ranges; classification is **configuration-specific** and LSO-determined.
+- Outdoor emission, flight integration, and field employment are **separate program gates** — not extensions of an incomplete bench NHZ.
+
 ---
 
 ## 7. Integration concepts
