@@ -15,7 +15,7 @@
 
 ### Core requirements and constraints
 
-- Must be mountable on existing or near-term drone platforms (target weight class: small-to-medium UAVs, with consideration for integration onto platforms like Solakair Solace or similar VTOL/fixed-wing systems).
+- Must be mountable on existing or near-term drone platforms (target weight class: small-to-medium UAVs, with primary integration target **Drone-X** VTOL/fixed-wing host, **10 kg payload** capacity).
 - Use a multi-point or patterned beam approach (multiple lower-power emitters or beam-splitting optics) instead of a single high-power focused beam.
 - Prioritize non-kinetic / soft-kill effects (sensor dazzling, image degradation, navigation disruption, or temporary blinding of EO/IR cameras).
 - Keep the system as simple, low-power, and producible as possible while remaining effective.

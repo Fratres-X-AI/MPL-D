@@ -160,4 +160,4 @@ Moving past bench testing requires laser safety classification analysis (IEC 608
 ## Open questions / gaps
 
 - Program decision on whether Phase 1 flight test is authorized at all.
-- Host platform selection (Solace vs smaller tactical) — affects all interface assumptions.
+- Host platform **Drone-X** (10 kg payload baseline) — hardpoint interface still open (R-INT-001).

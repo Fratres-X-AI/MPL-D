@@ -109,11 +109,11 @@ These benchmarks prove compact dazzler **packaging is physically plausible**. Th
 
 ---
 
-## 8. Host platform notes (Solace / centerline mount)
+## 8. Host platform notes (Drone-X / centerline mount)
 
 | Claim | Status in repository |
 |-------|---------------------|
-| Solace ~10 kg payload | **Unverified** — vendor datasheet not in repo (R-INT-001) |
+| Drone-X **10 kg payload** | **Program baseline** (assigned) |
 | Centerline “A-10 style” mount, no gimbal | Consistent with static-pattern architecture; boresight held by **host pointing only** |
 | Rocket host <3.5 kg / 18 in | Outside current MPL-D module envelope docs — if used as separate air-launched host, requires separate interface spec |
 

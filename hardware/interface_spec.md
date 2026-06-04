@@ -13,12 +13,12 @@ Define preliminary mechanical, electrical, and data interfaces between a host UA
 
 ## 2. Host Platform Classes
 
-| Class | Example reference | Payload mass budget (indicative) | Notes |
-|-------|-------------------|----------------------------------|-------|
-| Small tactical multirotor | Generic 5–15 kg MTOW class | 0.3–1.5 kg module | Severe power/thermal constraint |
-| Medium VTOL / fixed-wing | Solakair Solace-class (public marketing references only) | 2–8 kg module (assumed; unverified against Solace payload spec) | Requires airframe vendor confirmation |
+| Class | Example reference | Host payload / module budget | Notes |
+|-------|-------------------|------------------------------|-------|
+| **Primary host** | **Drone-X** VTOL/fixed-wing | **10 kg payload** (program baseline); ~0.7–3 kg dazzler module | Centerline mount; hardpoint/power tap not in repo |
+| Small tactical multirotor | Generic 5–15 kg MTOW class | 0.3–1.5 kg module (secondary) | Severe power/thermal constraint |
 
-**Assumption:** Solace payload capacity, power bus, and hardpoint geometry are **unknown** in this repository. All Solace references require vendor data sheet verification.
+**Baseline:** **Drone-X** with **10 kg payload** is the primary integration target. Hardpoint geometry and electrical architecture require vendor verification (R-INT-001).
 
 ---
 
@@ -106,5 +106,5 @@ Minimum command set (conceptual):
 
 ## Open questions / gaps
 
-- Confirmed Solace (or alternate host) payload hardpoint drawing and power tap location.
+- Confirmed Drone-X payload hardpoint drawing and power tap location.
 - Required connector standard (XT60, Anderson, military circular — host-dependent).

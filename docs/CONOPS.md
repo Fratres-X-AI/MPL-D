@@ -44,7 +44,7 @@ Host VTOL ──► coarse point at target ──► static multi-spot pattern �
 
 | Host | Role | Status |
 |------|------|--------|
-| Solace-class VTOL | Centerline under-fuselage mount | Payload limit **unverified** |
+| Drone-X VTOL / fixed-wing | Centerline under-fuselage mount | **10 kg payload** (program baseline) |
 | Small tactical UAS | Limited duty-cycle dazzle | Mass/power constrained |
 | 18 in / <3.5 kg rocket (user reference) | Separate air-launched concept | **Not integrated in MPL-D CAD** |
 

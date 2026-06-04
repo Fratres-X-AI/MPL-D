@@ -13,7 +13,7 @@
 | E1 | Is optical power ≥ 10 W CW rated? | **Yes** — triggers careful review |
 | E2 | Is wavelength military-exclusive? | **No** — 940 nm commercial industrial |
 | E3 | Foreign national access to repo? | Program policy TBD |
-| E4 | Integration data with military platform? | Concept only — Solace unverified |
+| E4 | Integration data with military platform? | Concept only — Drone-X hardpoint/power tap details not in repo |
 | E5 | Dual-use sensor denial purpose documented? | **Yes** — CONOPS defensive |
 | E6 | ITAR/EAR classification assigned? | **No** — compliance officer required |
 

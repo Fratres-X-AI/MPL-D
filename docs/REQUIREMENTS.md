@@ -65,7 +65,7 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 ### REQ-F-003 — Drone-mountable form factor
 
-**Description:** The payload module shall have a total mass target not exceeding 3 kg for small-host integration or 8 kg for medium VTOL-class hosts, with envelope suitable for external mount.
+**Description:** The payload module shall have a total mass target not exceeding 3 kg for the dazzler assembly on the primary **Drone-X** host (**10 kg payload** capacity program baseline), with envelope suitable for centerline external mount.
 
 **Rationale:** Mountable on small-to-medium UAV platforms per project constraints.
 
@@ -348,4 +348,4 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 ## Open questions / gaps
 
 - Final wavelength selection drives REQ-S-001 hazard analysis — not fixed.
-- Host platform selection drives REQ-F-003 mass split — Solace payload limit unverified.
+- Host platform **Drone-X** (10 kg payload baseline) — REQ-F-003 mass split; hardpoint/power tap still open (R-INT-001).

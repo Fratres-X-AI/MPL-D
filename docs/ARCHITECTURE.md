@@ -172,7 +172,7 @@ A separate trade input proposes **915–940 nm, ~10 W fiber-coupled multimode di
 
 **915 nm vs 940 nm:** Both available from multiple suppliers (~$475–600 class listings). Down-select requires surrogate tests on unfiltered vs IR-cut vs NIR-augmented classes — not datasheet comparison alone.
 
-**Solace / payload:** Claims of ~10 kg payload capacity for Solakair Solace are **unverified** in this repository (R-INT-001). Centerline mount without gimbal remains consistent with static-pattern architecture.
+**Drone-X / payload:** Host **Drone-X** with **10 kg payload** capacity is the program integration baseline. Hardpoint geometry and power tap location are **not** in this repository — vendor confirmation still required (R-INT-001). Centerline mount without gimbal remains consistent with static-pattern architecture.
 
 Full component tables, literature caveats, pulse/thermal notes: [`hardware/candidate_components.md`](../hardware/candidate_components.md). First-order 940 nm irradiance bounds: [`analysis/nir_940nm_link_budget_notes.md`](../analysis/nir_940nm_link_budget_notes.md).
 
@@ -468,10 +468,11 @@ NIR and visible architectures require **separate** hazard cases if both are benc
 
 ## 7. Integration concepts
 
-### Solace-class VTOL / fixed-wing (air-to-air carry)
+### Drone-X VTOL / fixed-wing (air-to-air carry)
 
-- **Concept:** Medium payload bay or external hardpoint mount; forward-fixed pattern aligned with approach axis.
-- **Assumption:** Payload capacity and power tap **unverified** against Solakair Solace public materials — vendor confirmation mandatory (R-INT-001).
+- **Concept:** External hardpoint or centerline under-fuselage mount; forward-fixed pattern aligned with approach axis.
+- **Baseline:** **Drone-X**, **10 kg payload** capacity (program-defined). Dazzler module planning mass ~0.7–3 kg — substantial payload margin for multi-unit carriage if CONOPS requires.
+- **Assumption:** Hardpoint drawing and power tap **not** in repo — vendor confirmation mandatory (R-INT-001).
 - **Employment concept (defensive only):** Host positions to place dazzler boreSight within target sensor FOV during intercept geometry; static pattern increases capture volume vs single beam.
 - **Maturity:** Concept. No interface drawings.
 
@@ -519,6 +520,6 @@ See [`ROADMAP.md`](ROADMAP.md). Phase 0: bench pattern demo, irradiance map, sur
 ## Open questions / gaps
 
 - NHZ and laser classification for pulsed 940 nm multi-beamlet — LSO pending.
-- Host platform confirmation for interface and mass split (Solace payload limit unverified).
+- Drone-X hardpoint and power tap confirmation (10 kg payload baseline assigned; interface details open).
 - DOE supplier and grid geometry — blocks O-02 order.
 - Static pattern vs R-TRK-001 acceptability — may force Phase 1+ tracking.

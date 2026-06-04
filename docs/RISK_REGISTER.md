@@ -25,7 +25,7 @@ Safety and policy entries below use the full descriptive title. MPL-D appears on
 | R-EMI-001 | Technical | Laser driver EMI degrades host GPS/comms | Navigation failure on host | L–M | Known EMI coupling class; no test on selected host | Shielding; filtering; spatial separation (mass) | Open |
 | R-DOE-001 | Technical | DOE zero-order leakage and efficiency loss waste power and create hazard path | 15–40% optical power in uncontrolled order (vendor-class estimate); eye hazard | M | Public DOE efficiency ranges | Block zero order; measure before full power; replace DOE with emitter array (+wiring) | Open |
 | R-DAT-001 | Technical | AI-generated design documentation contains omission or numeric error | Wrong design decisions before independent review | M | Known LLM documentation risk | Independent review; bench validation before commitment | Open |
-| R-INT-001 | Operational | Host platform interface (Solace or other) payload/power limits unknown | Integration infeasible without redesign | M | No vendor datasheet in repo | Early vendor engagement; ground mockup only Phase 0 | Open |
+| R-INT-001 | Operational | Drone-X hardpoint and power tap interface details not in repository | Integration rework if hardpoint/power incompatible | M | 10 kg payload assigned as program baseline; mechanical/electrical drawings absent | Vendor engagement; ground mockup Phase 0 | Open |
 | R-REG-001 | Policy-Legal-ROE | Outdoor or flight laser tests without regulatory authorization | Fines; test shutdown | M | Local aviation/laser rules vary | Restrict Phase 0 to indoor bench; legal review before outdoor | Open |
 
 **Likelihood key:** H = High, M = Medium, L = Low (qualitative; no historical failure rate data for this program).
@@ -65,4 +65,4 @@ The Counter-UAS Multi-Point Laser Dazzler Prototype is intended for sensor denia
 ## Open questions / gaps
 
 - No program-selected wavelength → eye hazard and atmospheric risks remain bounded but not finalized.
-- No selected host platform → R-INT-001 and R-PWR-001 remain open with wide uncertainty.
+- Drone-X hardpoint and power tap — 10 kg payload baseline assigned; interface drawings not in repo.
