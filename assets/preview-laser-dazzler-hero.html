@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPL-D — Laser Dazzler Hero Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    @keyframes pulse-beam { 0%,100%{opacity:.25} 50%{opacity:.95} }
+    @keyframes pulse-hit { 0%,100%{opacity:.2;transform:scale(.7)} 50%{opacity:1;transform:scale(1.15)} }
+    .beam { animation: pulse-beam 2.4s ease-in-out infinite; }
+    .hit { animation: pulse-hit 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    .beam-0{animation-delay:0s}.beam-1{animation-delay:.18s}.beam-2{animation-delay:.36s}
+    .beam-3{animation-delay:.54s}.beam-4{animation-delay:.72s}.beam-5{animation-delay:.9s}
+    .beam-6{animation-delay:1.08s}.beam-7{animation-delay:1.26s}.beam-8{animation-delay:1.44s}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-200 antialiased">
+  <section class="relative flex min-h-screen w-full flex-col lg:flex-row">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.04]" style="background-image:linear-gradient(to right,#94a3b8 1px,transparent 1px),linear-gradient(to bottom,#94a3b8 1px,transparent 1px);background-size:32px 32px"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-[0.03]" style="background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,#64748b 3px,#64748b 4px)"></div>
+
+    <div class="relative z-10 flex w-full flex-col justify-center px-6 py-16 sm:px-10 lg:w-[55%] lg:px-14 xl:px-20">
+      <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Fratres X AI — Prototype</p>
+      <h1 class="text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.05] tracking-tight text-slate-100">Multi-Point Laser Dazzler</h1>
+      <p class="mt-5 text-[clamp(1.125rem,2.5vw,1.5rem)] font-medium text-slate-300">Non-kinetic sensor denial against electro-optical systems</p>
+      <p class="mt-6 max-w-prose text-base leading-relaxed text-slate-400">Prototype using multi-emitter or diffractive beam delivery to degrade or overload EO/IR cameras on unmanned aerial platforms. Designed within small-to-medium UAV payload constraints.</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="#architecture" class="rounded-md bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-cyan-300">View Architecture</a>
+        <a href="#technical-brief" class="rounded-md border border-slate-600 px-5 py-2.5 text-sm font-semibold text-slate-200 hover:border-slate-500 hover:bg-slate-900">Technical Brief</a>
+      </div>
+      <p class="mt-auto pt-16 text-xs text-slate-600 lg:pt-24">Fratres X AI | Defense Projects — Prototype Documentation</p>
+    </div>
+
+    <div class="relative z-10 flex w-full items-center justify-center px-4 py-10 lg:w-[45%] lg:py-16" role="img" aria-label="Emitter module multi-point beam schematic">
+      <svg viewBox="0 0 520 420" class="h-auto w-full max-w-xl" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ap" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22d3ee" stop-opacity="0.15"/><stop offset="100%" stop-color="#22d3ee" stop-opacity="0.6"/></linearGradient>
+          <clipPath id="sc"><rect x="362" y="158" width="112" height="72" rx="4"/></clipPath>
+        </defs>
+
+        <!-- sensor -->
+        <rect x="356" y="152" width="124" height="84" rx="6" fill="none" stroke="#475569"/>
+        <rect x="362" y="158" width="112" height="72" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1.5"/>
+        <!-- pixel grid static -->
+        <g fill="#1e293b" stroke="#334155" stroke-width="0.5">
+          <rect x="370" y="166" width="10" height="8"/><rect x="383" y="166" width="10" height="8"/><rect x="396" y="166" width="10" height="8"/><rect x="409" y="166" width="10" height="8"/><rect x="422" y="166" width="10" height="8"/><rect x="435" y="166" width="10" height="8"/><rect x="448" y="166" width="10" height="8"/><rect x="461" y="166" width="10" height="8"/>
+          <rect x="370" y="178" width="10" height="8"/><rect x="383" y="178" width="10" height="8"/><rect x="396" y="178" width="10" height="8"/><rect x="409" y="178" width="10" height="8"/><rect x="422" y="178" width="10" height="8"/><rect x="435" y="178" width="10" height="8"/><rect x="448" y="178" width="10" height="8"/><rect x="461" y="178" width="10" height="8"/>
+          <rect x="370" y="190" width="10" height="8"/><rect x="383" y="190" width="10" height="8"/><rect x="396" y="190" width="10" height="8"/><rect x="409" y="190" width="10" height="8"/><rect x="422" y="190" width="10" height="8"/><rect x="435" y="190" width="10" height="8"/><rect x="448" y="190" width="10" height="8"/><rect x="461" y="190" width="10" height="8"/>
+          <rect x="370" y="202" width="10" height="8"/><rect x="383" y="202" width="10" height="8"/><rect x="396" y="202" width="10" height="8"/><rect x="409" y="202" width="10" height="8"/><rect x="422" y="202" width="10" height="8"/><rect x="435" y="202" width="10" height="8"/><rect x="448" y="202" width="10" height="8"/><rect x="461" y="202" width="10" height="8"/>
+          <rect x="370" y="214" width="10" height="8"/><rect x="383" y="214" width="10" height="8"/><rect x="396" y="214" width="10" height="8"/><rect x="409" y="214" width="10" height="8"/><rect x="422" y="214" width="10" height="8"/><rect x="435" y="214" width="10" height="8"/><rect x="448" y="214" width="10" height="8"/><rect x="461" y="214" width="10" height="8"/>
+        </g>
+        <text x="418" y="252" text-anchor="middle" fill="#64748b" font-size="11">EO sensor (schematic)</text>
+
+        <!-- beams -->
+        <g stroke="#22d3ee" stroke-linecap="round">
+          <line class="beam beam-0" x1="168" y1="194" x2="268" y2="148" stroke-width="1.5"/><line class="beam beam-0" x1="268" y1="148" x2="378" y2="178" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-0" cx="378" cy="178" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-1" x1="168" y1="196" x2="278" y2="162" stroke-width="1.5"/><line class="beam beam-1" x1="278" y1="162" x2="392" y2="186" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-1" cx="392" cy="186" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-2" x1="168" y1="198" x2="288" y2="176" stroke-width="1.5"/><line class="beam beam-2" x1="288" y1="176" x2="406" y2="194" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-2" cx="406" cy="194" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-3" x1="168" y1="200" x2="296" y2="190" stroke-width="1.5"/><line class="beam beam-3" x1="296" y1="190" x2="420" y2="202" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-3" cx="420" cy="202" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-4" x1="168" y1="202" x2="300" y2="202" stroke-width="2"/><line class="beam beam-4" x1="300" y1="202" x2="434" y2="208" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-4" cx="434" cy="208" r="5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-5" x1="168" y1="204" x2="296" y2="214" stroke-width="1.5"/><line class="beam beam-5" x1="296" y1="214" x2="448" y2="214" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-5" cx="448" cy="214" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-6" x1="168" y1="206" x2="288" y2="228" stroke-width="1.5"/><line class="beam beam-6" x1="288" y1="228" x2="462" y2="220" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-6" cx="462" cy="220" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-7" x1="168" y1="208" x2="278" y2="242" stroke-width="1.5"/><line class="beam beam-7" x1="278" y1="242" x2="476" y2="226" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-7" cx="476" cy="226" r="4.5" fill="#22d3ee" stroke="none"/>
+          <line class="beam beam-8" x1="168" y1="210" x2="268" y2="256" stroke-width="1.5"/><line class="beam beam-8" x1="268" y1="256" x2="490" y2="232" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><circle class="hit beam-8" cx="490" cy="232" r="4.5" fill="#22d3ee" stroke="none"/>
+        </g>
+
+        <g clip-path="url(#sc)"><rect x="362" y="158" width="112" height="72" fill="#22d3ee" opacity="0.1"><animate attributeName="opacity" values="0.04;0.16;0.06;0.14;0.05" dur="3.6s" repeatCount="indefinite"/></rect></g>
+
+        <!-- emitter -->
+        <rect x="48" y="152" width="120" height="100" rx="5" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+        <rect x="58" y="162" width="100" height="26" rx="2" fill="#0f172a" stroke="#334155"/><text x="108" y="179" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">DRIVER</text>
+        <rect x="58" y="196" width="100" height="44" rx="2" fill="#0f172a" stroke="#334155"/><text x="108" y="214" text-anchor="middle" fill="#64748b" font-size="8" font-family="monospace">OPTICS + DOE</text>
+        <ellipse cx="108" cy="228" rx="20" ry="7" fill="none" stroke="#475569"/>
+        <rect x="162" y="188" width="8" height="28" rx="2" fill="url(#ap)" stroke="#22d3ee"/>
+        <text x="108" y="268" text-anchor="middle" fill="#64748b" font-size="11">Emitter module</text>
+      </svg>
+    </div>
+  </section>
+</body>
+</html>

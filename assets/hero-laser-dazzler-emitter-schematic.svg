@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Schematic: multi-point laser dazzler emitter engaging electro-optical sensor target">
+  <defs>
+    <linearGradient id="aperture" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.65"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#94a3b8" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="3" x2="4" y2="3" stroke="#64748b" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="beam-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="960" height="540" fill="#020617"/>
+  <rect width="960" height="540" fill="url(#grid)"/>
+  <rect width="960" height="540" fill="url(#scan)"/>
+
+  <!-- Dimension reference lines -->
+  <g stroke="#334155" stroke-width="1" stroke-dasharray="4 4" opacity="0.5">
+    <line x1="80" y1="480" x2="880" y2="480"/>
+    <line x1="80" y1="60" x2="80" y2="480"/>
+  </g>
+  <text x="88" y="52" fill="#475569" font-family="ui-monospace, monospace" font-size="11">REF  MPL-D SCHEMATIC (NOT TO SCALE)</text>
+
+  <!-- EO sensor target -->
+  <g id="sensor">
+    <rect x="668" y="178" width="132" height="84" rx="6" fill="none" stroke="#475569" stroke-width="1"/>
+    <rect x="678" y="188" width="112" height="64" rx="4" fill="#0f172a" stroke="#64748b" stroke-width="1.5"/>
+    <!-- pixel grid 8 x 5 -->
+    <g fill="#1e293b" stroke="#334155" stroke-width="0.5">
+      <rect x="686" y="196" width="10" height="8"/><rect x="699" y="196" width="10" height="8"/><rect x="712" y="196" width="10" height="8"/><rect x="725" y="196" width="10" height="8"/><rect x="738" y="196" width="10" height="8"/><rect x="751" y="196" width="10" height="8"/><rect x="764" y="196" width="10" height="8"/><rect x="777" y="196" width="10" height="8"/>
+      <rect x="686" y="208" width="10" height="8"/><rect x="699" y="208" width="10" height="8"/><rect x="712" y="208" width="10" height="8"/><rect x="725" y="208" width="10" height="8"/><rect x="738" y="208" width="10" height="8"/><rect x="751" y="208" width="10" height="8"/><rect x="764" y="208" width="10" height="8"/><rect x="777" y="208" width="10" height="8"/>
+      <rect x="686" y="220" width="10" height="8"/><rect x="699" y="220" width="10" height="8"/><rect x="712" y="220" width="10" height="8"/><rect x="725" y="220" width="10" height="8"/><rect x="738" y="220" width="10" height="8"/><rect x="751" y="220" width="10" height="8"/><rect x="764" y="220" width="10" height="8"/><rect x="777" y="220" width="10" height="8"/>
+      <rect x="686" y="232" width="10" height="8"/><rect x="699" y="232" width="10" height="8"/><rect x="712" y="232" width="10" height="8"/><rect x="725" y="232" width="10" height="8"/><rect x="738" y="232" width="10" height="8"/><rect x="751" y="232" width="10" height="8"/><rect x="764" y="232" width="10" height="8"/><rect x="777" y="232" width="10" height="8"/>
+      <rect x="686" y="244" width="10" height="8"/><rect x="699" y="244" width="10" height="8"/><rect x="712" y="244" width="10" height="8"/><rect x="725" y="244" width="10" height="8"/><rect x="738" y="244" width="10" height="8"/><rect x="751" y="244" width="10" height="8"/><rect x="764" y="244" width="10" height="8"/><rect x="777" y="244" width="10" height="8"/>
+    </g>
+    <!-- saturation wash -->
+    <rect x="678" y="188" width="112" height="64" rx="4" fill="#22d3ee" opacity="0.08"/>
+    <text x="734" y="292" text-anchor="middle" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13">EO sensor (schematic)</text>
+    <text x="734" y="308" text-anchor="middle" fill="#475569" font-family="ui-monospace, monospace" font-size="10">FPA  multi-point overload</text>
+  </g>
+
+  <!-- Beam paths (9) -->
+  <g stroke-linecap="round">
+    <!-- beam 1 -->
+    <line x1="248" y1="220" x2="380" y2="168" stroke="#22d3ee" stroke-width="1.5" opacity="0.85"/>
+    <line x1="380" y1="168" x2="692" y2="200" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"/>
+    <circle cx="692" cy="200" r="5" fill="#22d3ee" opacity="0.9"/>
+    <!-- beam 2 -->
+    <line x1="248" y1="222" x2="395" y2="182" stroke="#22d3ee" stroke-width="1.5" opacity="0.75"/>
+    <line x1="395" y1="182" x2="705" y2="208" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.65"/>
+    <circle cx="705" cy="208" r="5" fill="#22d3ee" opacity="0.85"/>
+    <!-- beam 3 -->
+    <line x1="248" y1="224" x2="408" y2="196" stroke="#22d3ee" stroke-width="1.5" opacity="0.9"/>
+    <line x1="408" y1="196" x2="718" y2="216" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"/>
+    <circle cx="718" cy="216" r="5" fill="#22d3ee" opacity="0.95"/>
+    <!-- beam 4 -->
+    <line x1="248" y1="226" x2="418" y2="210" stroke="#22d3ee" stroke-width="1.5" opacity="0.8"/>
+    <line x1="418" y1="210" x2="731" y2="224" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.68"/>
+    <circle cx="731" cy="224" r="5" fill="#22d3ee" opacity="0.88"/>
+    <!-- beam 5 center -->
+    <line x1="248" y1="228" x2="430" y2="228" stroke="#22d3ee" stroke-width="2" opacity="1"/>
+    <line x1="430" y1="228" x2="744" y2="232" stroke="#22d3ee" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.75"/>
+    <circle cx="744" cy="232" r="6" fill="#22d3ee"/>
+    <!-- beam 6 -->
+    <line x1="248" y1="230" x2="418" y2="246" stroke="#22d3ee" stroke-width="1.5" opacity="0.8"/>
+    <line x1="418" y1="246" x2="757" y2="240" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.68"/>
+    <circle cx="757" cy="240" r="5" fill="#22d3ee" opacity="0.88"/>
+    <!-- beam 7 -->
+    <line x1="248" y1="232" x2="408" y2="260" stroke="#22d3ee" stroke-width="1.5" opacity="0.9"/>
+    <line x1="408" y1="260" x2="770" y2="248" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"/>
+    <circle cx="770" cy="248" r="5" fill="#22d3ee" opacity="0.95"/>
+    <!-- beam 8 -->
+    <line x1="248" y1="234" x2="395" y2="274" stroke="#22d3ee" stroke-width="1.5" opacity="0.75"/>
+    <line x1="395" y1="274" x2="783" y2="252" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.65"/>
+    <circle cx="783" cy="252" r="5" fill="#22d3ee" opacity="0.85"/>
+    <!-- beam 9 -->
+    <line x1="248" y1="236" x2="380" y2="288" stroke="#22d3ee" stroke-width="1.5" opacity="0.85"/>
+    <line x1="380" y1="288" x2="696" y2="256" stroke="#22d3ee" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"/>
+    <circle cx="696" cy="256" r="5" fill="#22d3ee" opacity="0.9"/>
+  </g>
+
+  <!-- Soft beam glow layer -->
+  <g filter="url(#beam-soft)" opacity="0.35">
+    <line x1="248" y1="228" x2="744" y2="232" stroke="#22d3ee" stroke-width="3"/>
+  </g>
+
+  <!-- Emitter housing -->
+  <g id="emitter">
+    <!-- mounting bracket -->
+    <rect x="108" y="168" width="12" height="120" rx="2" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <!-- main housing -->
+    <rect x="120" y="176" width="128" height="104" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+    <!-- driver PCB block -->
+    <rect x="132" y="188" width="104" height="28" rx="3" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="184" y="206" text-anchor="middle" fill="#64748b" font-family="ui-monospace, monospace" font-size="10">DRIVER / PULSE CTRL</text>
+    <!-- optics stack -->
+    <rect x="132" y="224" width="104" height="44" rx="3" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="184" y="242" text-anchor="middle" fill="#64748b" font-family="ui-monospace, monospace" font-size="10">COLLIMATOR + DOE</text>
+    <!-- cylindrical lens hint -->
+    <ellipse cx="184" cy="258" rx="22" ry="8" fill="none" stroke="#475569" stroke-width="1"/>
+    <!-- aperture -->
+    <rect x="244" y="214" width="8" height="28" rx="2" fill="url(#aperture)" stroke="#22d3ee" stroke-width="1.25"/>
+    <line x1="252" y1="228" x2="268" y2="228" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+    <text x="184" y="296" text-anchor="middle" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13">Emitter module</text>
+    <text x="184" y="312" text-anchor="middle" fill="#475569" font-family="ui-monospace, monospace" font-size="10">940 nm  multi-point delivery</text>
+  </g>
+
+  <!-- Legend -->
+  <g font-family="ui-monospace, monospace" font-size="10" fill="#475569">
+    <rect x="80" y="420" width="10" height="2" fill="#22d3ee"/>
+    <text x="96" y="424">beam path</text>
+    <rect x="180" y="418" width="10" height="6" fill="#1e293b" stroke="#475569" stroke-width="0.5"/>
+    <text x="196" y="424">housing</text>
+    <circle cx="285" cy="421" r="4" fill="#22d3ee"/>
+    <text x="296" y="424">impact point</text>
+  </g>
+
+  <text x="880" y="520" text-anchor="end" fill="#334155" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11">Fratres X AI  MPL-D</text>
+</svg>
