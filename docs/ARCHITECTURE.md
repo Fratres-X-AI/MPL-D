@@ -327,6 +327,22 @@ Summary:
 > - **Pattern fidelity under operational vibration is unknown.** Bench-static DOE or multi-emitter alignment does not bound spot wander, inter-beamlet registration error, or zero-order leakage growth under host vibration spectra (VTOL/prop, gust, maneuver). No vibration-table data exists in-repo.
 > - **Eye safety and Protocol IV outcomes are parameter-locked, not resolved at Preliminary Design maturity.** Hazard classification and employment legality shift with wavelength, pulse structure, divergence, range to non-combatants, and atmospheric scattering; a visible multi-point dazzler is not automatically equivalent to an IR-only sensor-denial path for safety or export review.
 
+### Phase 0 Minimum Surrogate Sensor Set
+
+**Maturity:** Preliminary Design — surrogate set defined to enable Phase 0 test planning. No actual sensor samples procured or characterized yet.
+
+**Evidence basis:** Sensor-class definitions derived from public commercial UAS and FPV camera literature classes. No measured spectral response, AGC transfer curves, or dazzle thresholds exist for this program.
+
+This surrogate set is the minimum required before any final single-band or dual-band source recommendation can be locked. Absence of one class leaves the trade open.
+
+| Class | Representative of | Spectral response (planning) | Typical AGC behavior (assumption) | Role in 532 nm vs NIR trade |
+|-------|-------------------|------------------------------|-------------------------------------|----------------------------|
+| **1. Unfiltered silicon CMOS** | Many FPV and low-cost commercial drone cameras with full visible + NIR sensitivity (no IR-cut filter) | Peak QE in visible; significant response into ~850–1000 nm unless filtered | Fast auto-exposure / auto-gain; may recover after dazzle pulse unless saturated or blinded | Bounds **532 nm** and **NIR (850–980 nm)** effectiveness on least-filtered commercial paths; visible and NIR both relevant |
+| **2. IR-cut filtered CMOS** | Most daylight-optimized commercial UAS cameras and some military small-UAS EO stacks | Visible band emphasized; NIR heavily attenuated by dielectric IR-cut | AGC tuned for daylight scenes; may resist saturation differently than unfiltered paths | **Required** to test whether NIR-primary architecture fails against filtered EO; **532 nm** may remain only viable band for this class |
+| **3. NIR-augmented or SWIR-capable sensor** | Low-light / IR-assisted drone cameras, some fused EO payloads with extended NIR or short-wave IR channels | Enhanced or dedicated NIR/SWIR path (class-dependent; not threat-representative without datasheet) | AGC and HDR modes vary; low-light modes may increase gain — dazzle interaction **unknown** | **Required** to bound **NIR (850–1064 nm class)** vs **532 nm** on sensors designed for low-light or IR-assisted imaging; absence leaves NIR trade speculative |
+
+**Blunt constraint:** Procuring fewer than three classes, or substituting datasheet-only analysis without bench exposure, does **not** close the wavelength down-select. Military-hardened or AI-processed threat sensors remain outside this minimum set — Phase 0 results must not be extrapolated to them (R-EFF-001).
+
 ---
 
 ## 7. Integration concepts
