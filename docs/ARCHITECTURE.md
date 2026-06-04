@@ -13,30 +13,33 @@
 ```mermaid
 flowchart TB
   subgraph payload [Payload Module]
-    LS[Laser Source(s)]
-    BCP[Beam Conditioning and Pattern Generation]
-    OO[Output Optics and Aperture]
-    MV[Mount and Vibration Isolation]
-    PM[Power Management]
-    TM[Thermal Management]
-    CE[Control Electronics and Targeting Interface]
+    LaserSource[Laser Source]
+    BeamConditioning[Beam Conditioning]
+    DOEPatternGen[DOE Pattern Generator]
+    OutputOptics[Output Optics]
+    MountInterface[Mount Interface]
+    PowerMgmt[Power Management]
+    ThermalMgmt[Thermal Management]
+    ControlElectronics[Control Electronics and Targeting Interface]
   end
   subgraph host [Host UAV]
-    BUS[Power Bus]
-    FC[Flight Controller]
-    CAM[Optional Host Camera]
+    PowerBus[Power Bus]
+    FlightController[Flight Controller]
+    HostCamera[Optional Host Camera]
   end
-  BUS --> PM
-  PM --> LS
-  PM --> TM
-  PM --> CE
-  CE --> LS
-  LS --> BCP
-  BCP --> OO
-  MV --- payload
-  FC --> CE
-  CAM -.-> CE
-  OO -->|optical pattern| TARGET[Target UAS EO/IR Sensor]
+  PowerBus --> PowerMgmt
+  PowerMgmt --> LaserSource
+  PowerMgmt --> ThermalMgmt
+  PowerMgmt --> ControlElectronics
+  ControlElectronics --> LaserSource
+  LaserSource --> BeamConditioning
+  BeamConditioning --> DOEPatternGen
+  DOEPatternGen --> OutputOptics
+  OutputOptics --> MountInterface
+  MountInterface --- payload
+  FlightController --> ControlElectronics
+  HostCamera -.-> ControlElectronics
+  OutputOptics -->|optical pattern| TargetSensor[Target UAS EO/IR Sensor]
 ```
 
 ### Information and power flows
@@ -45,7 +48,7 @@ flowchart TB
 
 **Control flow:** Flight controller or mission computer → arm/enable commands → control electronics → laser drivers (pulsed). Optional host camera metadata may cue dazzle timing in future phases; **Phase 0 has no closed-loop tracking.**
 
-**Optical flow:** Laser source(s) → beam conditioning (collimation, filtering) → pattern generation (DOE or discrete emitters) → output aperture → free-space propagation → target sensor aperture (uncontrolled alignment unless platform pointing cooperates).
+**Optical flow:** Laser source → beam conditioning (collimation, filtering) → DOE / pattern generator → output optics → mount interface → free-space propagation → target sensor aperture (uncontrolled alignment unless platform pointing cooperates).
 
 ---
 
@@ -53,50 +56,218 @@ flowchart TB
 
 ### Recommended approach
 
-**Primary recommendation (Phase 0):** Multiple discrete visible-wavelength diode laser modules (520–532 nm class) or a single diode-pumped solid-state (DPSS) module feeding a static diffractive optical element (DOE).
+**Phase 0 default path (planning):** One compact **532 nm class** source (DPSS or fiber-coupled visible diode) feeding a static DOE, **or** multiple discrete green diode modules — subject to SWaP, zero-order leakage measurement, and surrogate sensor set definition. NIR down-select remains open until bench evidence defines a visible-band failure mode on defined surrogates.
 
 **Rationale:** Commercial availability, moderate wall-plug efficiency, established safety classification paths, and compatibility with COTS beam profiling for Phase 0. Visible wavelength simplifies surrogate camera testing (with acknowledged mismatch to IR-dominant military sensors).
 
-| Option | Wavelength | Planning P_opt per module | Maturity | Evidence |
-|--------|------------|---------------------------|----------|----------|
-| Fiber-coupled diode modules | 520 nm ±10 nm | 0.5–2 W | Preliminary Design (component class) | Vendor datasheets exist; none selected here |
-| Compact DPSS | 532 nm | 1–5 W | Preliminary Design (component class) | Higher efficiency than direct diode; thermal management required |
-| VCSEL arrays | 850 nm (example) | mW–W class | Concept for this application | Less common for long-range dazzle; eye safety differs |
-
-**Conservative total optical power (planning):** 2–10 W combined in pattern (low-watt to low-tens-of-watts upper planning bound for medium host); default analysis example uses 5 W in `analysis/power_thermal_budget.py`.
-
-**Multi-wavelength:** Not recommended for Phase 0 — doubles driver, safety, and optics complexity. IR channel (e.g., 808 nm or 1550 nm class) may be needed for IR sensor denial but requires separate hazard analysis and test assets.
-
-**Rejected:** Single high-power focused beam (10–100+ W class) — exceeds small UAV thermal/power budget, increases eye hazard and export sensitivity, contradicts multi-point requirement.
-
-**Maturity:** Concept at system level. Component classes are commercial; integrated system is unbuilt.
+**Rejected:** Single high-power focused beam (10–100+ W class) — exceeds small UAV thermal/power budget, increases eye hazard and export sensitivity, contradicts multi-point requirement. Kilowatt-class sources — **out of scope**.
 
 ---
 
-## 3. Beam delivery / pattern generation
+### Laser Source Trade Study
 
-### Recommended approach
+**Maturity:** Preliminary Design — first-order wavelength and power class trade complete. No breadboard, thermal measurement, or sensor response data yet.
 
-**Phase 0:** Static diffractive optical element (DOE) splitting one collimated beam into N spots **or** fixed linear array of 3–9 low-power emitters with individual collimation.
+**Evidence basis:** Commercial laser *classes* (vendor datasheets exist in the public domain; no part numbers selected in this repository), first-order physics in `docs/PHYSICS_BASIS.md` and `analysis/power_thermal_budget.py`, and qualitative sensor/atmospheric literature classes. **No** measured dazzle threshold, **no** threat-representative EO/IR sensor testing, **no** integrated thermal or EMI characterization.
 
-| Method | Pros | Cons |
-|--------|------|------|
-| Static DOE | Minimal moving parts; single emitter driver | Efficiency loss; zero-order leakage; alignment sensitive |
-| Multiple emitters | No zero-order; per-beam control | Mechanical alignment drift; wiring/thermal complexity |
-| Galvo scanning | Flexible pattern | Mass, power, vibration sensitivity — **rejected Phase 0** |
-| MEMS scanning | Lower mass than galvo | Reliability and control complexity — **rejected Phase 0** |
+**Scope:** Non-kinetic sensor denial on hostile UAS EO/IR apertures. Not hard-kill burn-through. Not a certified engagement range or effectiveness claim.
 
-**Pattern geometry (planning):** 3×3 or linear 5-spot array covering ~0.5–2° total field — wide enough to reduce precise tracking requirement; narrow enough to maintain per-beam irradiance at range. Exact angles **unvalidated**.
+#### Trade axes (what drives the down-select)
 
-**Divergence:** 1–5 mrad half-angle per beamlet (compact optics class).
+| Axis | Visible (520–532 nm DPSS / diode) | NIR (850–1064 nm diode / fiber-coupled) | Assessment (planning only) |
+|------|-------------------------------------|----------------------------------------|----------------------------|
+| EO sensor denial (visible-band CMOS) | Direct overlap with many commercial UAS camera bands | Weaker or indirect unless sensor has poor IR cut / leaky NIR path | Visible **may** align better with Phase 0 surrogate bench; **does not** prove military EO denial |
+| IR sensor denial (MWIR/LWIR, IR-augmented EO) | Generally **poor** match to thermal imager bands | Better match to silicon NIR paths and some fused EO channels; **not** a substitute for dazzling thermal bands | NIR **might** help IR-augmented stacks; effectiveness against filtered/hardened IR **unknown** (R-EFF-001) |
+| Simplicity / producibility | Mature 520–532 nm modules; DPSS adds thermal mass | Mature 850–980 nm fiber-coupled diodes; 1064 nm classes add optics/safety complexity | Trade is wavelength fit, not raw availability |
+| SWaP | DPSS: moderate mass, heat sink often required | Fiber-coupled: compact emitter head; fiber routing adds integration risk | At 2–10 W optical class, **thermal dissipation dominates** SWaP more than wavelength choice |
+| Eye safety / signature | High photopic hazard; **visible** off-axis signature | **Invisible** beam — higher accidental exposure risk | Neither is safe; NIR shifts hazard from perception to detection (R-EYE-001, Protocol IV review) |
+| Atmospheric propagation | 532 nm: σ often 0.05–0.2 km⁻¹ clear-day planning band | 850–1064 nm: comparable order-of-magnitude in clear air | No wavelength winner proven without locale-specific data |
 
-**Maturity:** Concept. DOE or array layout not fabricated.
+#### Visible wavelength (520–532 nm class)
+
+**Commercial classes (no selected SKU):** Direct diode / DPSS modules near 520–532 nm; compact DPSS 532 nm modules (1–5 W optical class common in industrial/lab tiers).
+
+**Pros (evidence class, not validated for this system):**
+
+- Strong overlap with unfiltered commercial UAS visible imagers used as Phase 0 surrogates.
+- Easier bench diagnostics (beam visualization with compliant methods; power meters widely calibrated at 532 nm).
+- Established IEC 60825-1 classification workflows and protective eyewear supply chains at green wavelengths.
+
+**Cons / limits:**
+
+- **Mismatch risk** to IR-dominant or filtered military EO — dazzle success **not** inferable from green bench tests.
+- Rayleigh scattering scales approximately as λ⁻⁴ — visible suffers **higher** clear-air scattering vs NIR at equal geometry (first-order; not campaign-validated).
+- **Visible signature** increases detectability; complicates concealment and ROE narrative.
+- **Eye hazard:** green is photopically weighted — nominal hazard zones are unforgiving for diverging multi-point patterns on dynamic platforms.
+- DPSS paths: η_wp often better than bare diode at same color, but **heat load remains large** relative to small-UAV duty cycle.
+
+#### NIR wavelength (850–1064 nm class)
+
+**Commercial classes (no selected SKU):** Fiber-coupled diode modules (850–980 nm; 1064 nm where offered); VCSEL arrays near 850 nm (mW–W class; beam quality often poor for long-range dazzle without additional optics — **unproven** for this CONOPS).
+
+**Pros (evidence class, not validated for this system):**
+
+- Better alignment with silicon NIR sensor paths on many EO payloads relative to 532 nm.
+- Lower Rayleigh scattering than visible at equal range — **may** improve transmission in clear air (order-of-magnitude only).
+- Reduced visible signature to human observers (**not** reduced hazard).
+
+**Cons / limits:**
+
+- Many commercial cameras include IR-cut filters — NIR dazzle **may fail entirely** on filtered surrogates; military stacks more likely filtered (R-EFF-001).
+- **Invisible beam collateral:** operators and bystanders lack visual warning; increased retinal exposure risk if NHZ discipline fails.
+- MWIR/LWIR thermal imagers are **not** addressed by NIR dazzle; fused targeting pipelines **unknown**.
+- VCSEL arrays: attractive on paper; pattern uniformity for multi-point dazzle **not** demonstrated in this program.
+
+#### Multi-wavelength vs single-wavelength
+
+| Approach | Claimed benefit | Cost / risk |
+|----------|-----------------|-------------|
+| Single visible | Lowest driver count, one safety case, one optics coating set | Leaves IR-path denial gap **unresolved** |
+| Single NIR | Targets silicon NIR paths | Leaves visible-only and filtered EO gaps; invisible hazard |
+| Dual-band (visible + NIR) | Covers more sensor classes in theory | Two drivers, thermal paths, wavelength-specific eyewear, boresight/coalignment, EMC, export/safety reviews; contradicts Phase 0 simplicity unless **measured** single-band failure on representative targets |
+
+**Recommendation (planning):** **Single wavelength for Phase 0.** Dual-band is **not** justified without bench evidence that the chosen single band fails against the minimum viable surrogate sensor set. Second band is a Phase 1+ decision gate, not default architecture.
+
+#### Optical and electrical power class (conservative bounds only)
+
+| Parameter | Conservative planning bound | Notes |
+|-----------|----------------------------|-------|
+| Total optical power in pattern | **2–10 W** combined (low single-digit to low tens of watts) | Above ~10 W optical on small hosts **likely** incompatible with continuous operation without aggressive duty cycling |
+| Per-module optical power | **0.5–5 W** class per emitter | Multi-point splits power across N beamlets — per-beam irradiance falls with N |
+| Wall-plug efficiency η_wp | **0.10–0.40** (planning); do not assume upper bound without datasheet | Electrical draw scales as P_opt / η_wp |
+| Electrical power at 5 W opt, η_wp = 0.22 | **~23 W** electrical, **~18 W** dissipated heat | Endurance limiter; not kW-class |
+| Rejected power class | **≥10–100+ W** single-beam industrial/defense lasers | Exceeds SWaP, thermal, safety envelope for drone-mount Phase 0 |
+
+**Endurance implication (unvalidated):** At η_wp ≈ 0.22 and 5 W optical, ~23 W electrical during dazzle may consume **10–30%** additional mission energy faster than baseline flight — treat as **uncertain** until measured on host bus.
+
+#### Options summary (commercial classes only)
+
+| Option | Wavelength | Planning P_opt | Maturity | Evidence |
+|--------|------------|----------------|----------|----------|
+| Fiber-coupled diode modules | 520 nm ±10 nm | 0.5–2 W / 2–10 W pattern | Preliminary Design (component class) | Vendor datasheets exist; none selected |
+| Compact DPSS | 532 nm | 1–5 W / 2–10 W pattern | Preliminary Design (component class) | Thermal management required |
+| Fiber-coupled diode | 850–980 nm (class) | 0.5–5 W / 2–10 W pattern | Preliminary Design (component class) | IR-cut filter risk on surrogates |
+| Fiber / DPSS (1064 nm class) | ~1064 nm | 1–5 W (industrial tiers) | Preliminary Design (component class) | Fusion-stack benefit **unknown** |
+| VCSEL arrays | ~850 nm (example) | mW–W | Concept for long-range dazzle | Beam quality **unproven** |
+
+#### Recommended next actions (laser source)
+
+1. **Define minimum surrogate sensor set** for Phase 0 (unfiltered CMOS, IR-cut CMOS, IR-augmented path if available) — without this, wavelength down-select is speculative.
+2. **Run parallel first-order budgets** for leading single-band candidates (532 nm DPSS vs multi-emitter green vs 850–980 nm fiber) using `analysis/power_thermal_budget.py` with **datasheet** η_wp, mass, and divergence.
+3. **Commission LSO-led hazard analysis** (IEC 60825-1 NHZ) for top two single-band architectures before procurement; include zero-order leakage if DOE is candidate.
+4. **Benchboard (bench only):** irradiance map at 1–5 m and surrogate camera saturation test — no outdoor or flight emission until regulatory approval.
+5. **Document pass/fail criteria** for visible vs NIR single-band against surrogate set; open gated dual-band or NIR-only Phase 1 trade only if visible fails defined criteria.
+
+---
+
+## 3. Beam delivery and pattern generation
+
+**Maturity (this subsection):** Preliminary Design — architecture down-select and pattern approach documented. Supporting evidence: COTS DOE/emitter classes bounded; **no** fabricated DOE, holographic element, alignment stack, irradiance map, vibration test, or flight integration data.
+
+---
+
+### Primary approach (Phase 0)
+
+**Configuration:** One high beam-quality source (planning class: compact DPSS 532 nm or fiber-coupled visible diode with stable beam profile) → beam conditioning (collimation, optional spatial filter) → **static** diffractive or holographic splitter (DOE / HOE) → output aperture.
+
+**Pattern:** Fixed multi-spot grid or line (planning: 3×3 or 5-spot linear; total field ~0.5–2°). Per-beamlet divergence: 1–5 mrad half-angle (compact optics class). Exact geometry and efficiency **unvalidated**.
+
+**Rationale vs scanning:** Scanning (galvo, MEMS, acousto-optic) adds moving parts, control loops, higher electrical draw, and failure modes that scale poorly on small VTOL hosts. A static pattern trades flexibility for **predictable** SWaP, single-driver simplicity, and bench verifiability. For Phase 0 there is **no** closed-loop tracking; the pattern must cover target motion uncertainty by angular spread, not by beam steering. Irradiance per spot falls with spot count (∝ split of fixed P_opt); this is accepted — dazzle against commercial EO sensors is a threshold effect, not burn-through.
+
+| Aspect | Static DOE / holographic splitter | Notes |
+|--------|-----------------------------------|-------|
+| Moving parts | None in pattern path | Mount isolation only |
+| Drivers | One primary laser channel | Simpler interlock and EMI |
+| Capture volume | Fixed FOV at boresight | Host must point; see integration |
+| Known penalties | Diffraction efficiency loss; zero-order leakage; alignment sensitivity | Zero-order must be dumped (REQ-S-003) |
+
+**Rejected for Phase 0 primary path:** Time-varying raster or Lissajous scan to simulate a grid — adds complexity without proven benefit at planned power tier.
+
+---
+
+### Alternative approach (secondary / IR-oriented)
+
+**Configuration:** VCSEL array (planning example: 850 nm class) + microlens or micro-optic array → **incoherent** NIR flood or coarse multi-lobe pattern.
+
+**Role:** Secondary architecture path when IR-heavy sensor denial is prioritized over visible surrogate testing. Lower spatial coherence may reduce speckle on some sensors; **does not** guarantee better dazzle — sensor AGC, bandpass filters, and sun background dominate outcomes (R-EFF-001).
+
+**Tradeoffs vs primary:** Lower beam quality and poorer range scaling per watt; different eye-safety and export classification path; array uniformity and thermal cross-talk across emitters. **Maturity for this application:** Concept. Not recommended as Phase 0 sole architecture without IR test assets and separate hazard analysis.
+
+---
+
+### Deprioritized approaches (later phase only)
+
+| Method | Why deprioritized (initial version) |
+|--------|-------------------------------------|
+| Galvo mirror scanning | Mass, power, bearing wear, vibration coupling, calibration drift |
+| MEMS scanning mirrors | Control complexity, shock/vibration fragility, limited aperture |
+| Acousto-optic deflectors | RF drive power, thermal, fixed efficiency vs wavelength, supply risk |
+
+**Later-phase admission criteria (all required):** Quantified static-pattern miss rate on maneuvering targets (R-TRK-001); host power/thermal headroom; demonstrated vibration isolation insufficient for static pattern; legal/LSO approval for scanned emission CONOPS. Until then, scanning is **speculative** SWaP and reliability cost without validated engagement gain.
+
+---
+
+### Pattern purpose (operational intent, not performance claim)
+
+The static multi-point pattern exists to:
+
+1. **Cover multi-camera UAS layouts** — nose, belly, and gimbal sensors are not co-located; a single pencil beam requires precise boresight hold on one aperture.
+2. **Absorb target and host motion uncertainty** — without Phase 0 tracking, angular spread substitutes for closed-loop aim (reduces peak I per spot).
+3. **Potentially disrupt navigation / tracking loops** — saturation, bloom, or AGC pull-in on commercial-class EO may degrade closed-loop vision aiding; **effect on military-hardened EO/IR is unknown** and must not be assumed.
+
+This is sensor denial at low combined power, not destruction. No claim of persistent blind or GPS denial.
+
+---
+
+### Limitations (stated plainly)
+
+| Limitation | Mechanism | Planning impact |
+|------------|-----------|-----------------|
+| Platform vibration | Angular jitter → beam wander and spot decentering | Order-of-magnitude irradiance loss on sensor (R-VIB-001); worse on VTOL/prop hosts |
+| DOE / laser thermal drift | Index change, mechanical expansion, wavelength shift | Pattern scale and zero-order walk; duty-cycle and cooling bound average power |
+| Atmospheric turbulence / scintillation | Index fluctuations along path | Irradiance variance and fade; outdoor engagement less predictable than bench |
+| Static pattern vs maneuver | Target leaves fixed FOV faster than host can reposition | Miss windows (R-TRK-001) |
+| Multi-spot power split | Fixed P_opt divided across N beamlets | Per-spot I(R) drops; range shrinks vs single-beam same power |
+
+**Omitted from Phase 0 claims:** Active beam stabilization, adaptive optics, and real-time pattern update.
+
+---
+
+### Host integration constraints
+
+Effectiveness assumes the host **maintains line-of-sight** from payload aperture to target sensor volume for the engagement interval. Boresight is coarse-aligned to host approach axis (planning: ±1–3° per `hardware/interface_spec.md`); **no** perfect stabilization is assumed.
+
+- Payload relies on **host pointing** + static pattern width, not an internal gimbal.
+- Prop/rotor harmonics couple into mount; elastomer isolation is planning mitigation only — **not** validated in flight.
+- If LOS breaks (terrain, aspect change, evasion), dazzle stops; there is no off-boresight compensation in Phase 0.
+
+---
+
+### Method summary (Phase 0 down-select)
+
+| Method | Phase 0 status | Maturity (application) |
+|--------|----------------|-------------------------|
+| Static DOE / holographic splitter + single quality source | **Primary** | Preliminary Design (pending layout + bench) |
+| Fixed array of 3–9 discrete emitters | **Acceptable alternate** | Concept (alignment drift risk) |
+| VCSEL + microlens NIR flood | **Secondary / IR path** | Concept |
+| Galvo / MEMS / acousto-optic scanning | **Deprioritized** | Not applicable Phase 0 |
+
+#### Recommended next actions (beam delivery / pattern)
+
+1. Down-select **DOE/holographic splitter vs fixed multi-emitter** using SWaP, zero-order safety, and supplier lead time (R-SUP-001).
+2. Issue preliminary optical stack drawing: source waist, collimator F/#, DOE period/grid, dump optics for zero-order, aperture clear diameter.
+3. Procure candidate DOE (or emitter array) and beam profiler path; execute T-01 pattern formation at 2 m with irradiance map.
+4. Run low-duty alignment thermal soak; log spot centroid drift vs time.
+5. Execute T-05 vibration table test; record angular wander vs input spectrum; compare to R-VIB-001 bounds.
+6. Document whether static pattern geometry meets R-TRK-001 acceptability for planned CONOPS or flags Phase 1+ tracking as mandatory — **do not** assume scan hardware without this gate.
 
 ---
 
 ## 4. Power and thermal budget
 
 See `analysis/power_thermal_budget.py` and `docs/PHYSICS_BASIS.md`.
+
+Credible electrical draw, dissipated heat, and duty-cycle limits cannot be stated as validated subsystem numbers until the laser source class (discrete diode vs DPSS), driver topology, and pattern-generation loss budget are down-selected. The table below is first-order bounding only: it propagates planning-class η_wp and P_opt from Section 2 without a chosen part number, measured driver efficiency, or enclosure thermal resistance. Treat any single-point wattage (e.g., ~23 W electrical at 5 W optical) as an order-of-magnitude planning anchor, not a host-interface commitment.
 
 | Parameter | Conservative bound | Basis |
 |-----------|-------------------|-------|
@@ -117,6 +288,8 @@ See `analysis/power_thermal_budget.py` and `docs/PHYSICS_BASIS.md`.
 ## 5. Effective range and engagement envelope
 
 **Blunt statement:** This repository does **not** certify an operational engagement range. First-order irradiance falls rapidly with range (∝ 1/R²) and atmospheric transmission.
+
+An engagement envelope in meters cannot be credibly quantified until source class, output aperture diameter, and per-beamlet divergence are fixed; irradiance at the target scales with optical power, pattern fill factor, geometric spreading (∝ 1/R² per beamlet), and atmospheric transmission at the operating wavelength. Until those inputs are frozen, the conservative envelope rows below remain speculative first-order bounds derived from unvalidated surrogate-camera assumptions — not range certification, not effectiveness against filtered or AGC-controlled sensors.
 
 | Target sensor class | Planning assessment | Evidence |
 |--------------------|---------------------|----------|
@@ -148,6 +321,12 @@ Summary:
 - Eye safety and Protocol IV / export control
 - **Sparse validation of low-power multi-point dazzle against operational threats**
 
+> **Cross-Cutting Risks and Gaps**
+>
+> - **Sensor denial thresholds are underspecified in public literature** for FPV, commercial, and military UAS cameras under realistic exposure control (AGC), bandpass/NIR-cut filters, burst/HDR modes, and AI-assisted glare rejection. This program has no validated irradiance-versus-range curves for those stacks at the planned multi-point power tier.
+> - **Pattern fidelity under operational vibration is unknown.** Bench-static DOE or multi-emitter alignment does not bound spot wander, inter-beamlet registration error, or zero-order leakage growth under host vibration spectra (VTOL/prop, gust, maneuver). No vibration-table data exists in-repo.
+> - **Eye safety and Protocol IV outcomes are parameter-locked, not resolved at Preliminary Design maturity.** Hazard classification and employment legality shift with wavelength, pulse structure, divergence, range to non-combatants, and atmospheric scattering; a visible multi-point dazzler is not automatically equivalent to an IR-only sensor-denial path for safety or export review.
+
 ---
 
 ## 7. Integration concepts
@@ -177,8 +356,8 @@ Summary:
 
 | Subsystem | Maturity | Supporting evidence |
 |-----------|----------|---------------------|
-| Laser Source(s) | Concept (system); Preliminary Design (COTS class) | No selected part number |
-| Beam Conditioning & Pattern Generation | Concept | No DOE design file |
+| Laser Source(s) | Preliminary Design | COTS diode/DPSS classes bounded in Section 2 (520–532 nm, 850–1064 nm, 0.5–5 W/module planning); vendor datasheets exist; no system part number, driver, or measured η_wp |
+| Beam Conditioning & Pattern Generation | Preliminary Design | Architecture down-select documented (static DOE/HOE primary; VCSEL NIR secondary); planning divergence 1–5 mrad and pattern FOV 0.5–2°; no DOE design file, alignment stack, or fabricated pattern map |
 | Output Optics & Aperture | Concept | No optical design |
 | Mount & Vibration Isolation | Concept | No CAD |
 | Power Management | Concept | No schematic |
@@ -195,12 +374,13 @@ See [`ROADMAP.md`](ROADMAP.md). Phase 0: bench pattern demo, irradiance map, sur
 
 ## Recommended next actions
 
-1. Down-select laser architecture (DOE vs multi-emitter) based on SWaP and zero-order safety.
-2. Run `analysis/power_thermal_budget.py` with candidate datasheet parameters.
-3. Begin LSO-led hazard analysis before hardware purchase.
+1. **Define minimum surrogate sensor set** and execute wavelength down-select gate (532 nm DPSS+DOE vs 850–980 nm fiber vs multi-emitter visible) using datasheet-backed budgets.
+2. **Issue preliminary optical stack drawing** and procure candidate DOE or emitter array; execute Phase 0 T-01/T-05 per `tests/phase0_test_plan_outline.md`.
+3. **Commission LSO-led IEC 60825-1 hazard analysis** for selected single-band architecture before full-power bench energization.
+4. **Update risk register** (R-EFF-001, R-VIB-001) with bench-derived likelihoods after first irradiance and vibration data — do not promote system maturity beyond Preliminary Design without thermal and sensor measurements.
 
 ## Open questions / gaps
 
-- Wavelength down-select (visible vs IR vs dual-band).
-- Host platform confirmation for interface and mass split.
-- Whether operational concept requires tracking (Phase 1+) vs acceptable static pattern limitations.
+- Surrogate sensor set definition — blocks final wavelength commitment.
+- Host platform confirmation for interface and mass split (Solace payload limit unverified).
+- Static pattern vs R-TRK-001 acceptability — may force Phase 1+ tracking; not resolved at this maturity level.
