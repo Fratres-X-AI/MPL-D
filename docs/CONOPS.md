@@ -17,10 +17,12 @@ Degrade, overwhelm, or temporarily blind hostile UAS electro-optical sensors usi
 ## 2. Employment geometry (planning)
 
 ```
-Host VTOL ──► coarse point at target ──► static multi-spot pattern ──► target EO aperture
+Host Drone-X ──► point like a flashlight ──► forward NIR cone / pattern ──► target EO aperture
      ▲                                              │
-     └── host maintains LOS; no closed-loop dazzle track in Phase 0
+     └── host maintains LOS; static optics; no gimbal in Phase 0
 ```
+
+**Flashlight metaphor:** Operator geometry is “shine the dazzler at the enemy camera” — host boresight + forward optical cone (see hero render). Internal DOE may split the cone into multiple beamlets not visible as separate rays at range.
 
 | Parameter | Planning value |
 |-----------|----------------|

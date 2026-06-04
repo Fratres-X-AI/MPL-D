@@ -2,6 +2,8 @@
 
 | File | Description |
 |------|-------------|
-| `hero-drone-x-mpld-render.png` | Conceptual 3D cinematic hero — Drone-X centerline mount, nine-beamlet NIR pattern. **Not CAD. Not validated geometry.**
+| `reference-drone-x-airframe.png` | User-supplied Drone-X airframe reference (silver high-wing VTOL) |
+| `hero-drone-x-flashlight-dazzler.png` | **Primary hero** — same airframe, centerline flashlight-style NIR dazzler cone |
+| `hero-drone-x-mpld-render.png` | Prior hero — nine-beamlet grid variant (superseded for README) |
 
 Do not use for safety, interface, or performance claims.

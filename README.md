@@ -5,9 +5,9 @@
 **Attribution:** Fratres X AI — Defense Prototype Documentation  
 **Repository:** https://github.com/Fratres-X-AI/MPL-D (private)
 
-![Concept hero render — Drone-X with MPL-D centerline payload (not CAD, not performance-validated)](assets/hero-drone-x-mpld-render.png)
+![Concept hero — Drone-X with flashlight-style MPL-D dazzler (not CAD, not performance-validated)](assets/hero-drone-x-flashlight-dazzler.png)
 
-*Conceptual cinematic render for documentation only. Not engineering drawing. Beam pattern and airframe geometry are illustrative.*
+*Conceptual cinematic render based on [`assets/reference-drone-x-airframe.png`](assets/reference-drone-x-airframe.png). Forward cone illustrates “point the host like a flashlight at the target sensor”; internal multi-point DOE may appear as structure inside the cone. Not engineering drawing.*
 
 ---
 
