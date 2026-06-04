@@ -252,6 +252,53 @@ Effectiveness assumes the host **maintains line-of-sight** from payload aperture
 | VCSEL + microlens NIR flood | **Secondary / IR path** | Concept |
 | Galvo / MEMS / acousto-optic scanning | **Deprioritized** | Not applicable Phase 0 |
 
+### Preliminary Optical Stack Concept and Emitter/DOE Down-Select Criteria
+
+**Maturity:** Preliminary Design — optical stack concept and down-select criteria documented. No hardware realization or measured pattern data.
+
+This subsection states the **minimum** optical chain for Phase 0 planning and the **conservative** criteria for choosing between a static diffractive pattern generator and a multi-emitter array. It does **not** assert that any candidate will meet dazzle effectiveness, range, or flight survivability requirements.
+
+#### Minimal optical stack (planning baseline)
+
+The smallest credible beam-delivery path for bench and eventual payload integration is:
+
+1. **Laser source** — one primary channel (planning class: compact DPSS or fiber-coupled **532 nm** module with stable beam profile; alternate paths are gated, not assumed).
+2. **Beam conditioning / collimation** — expand or filter the source waist, set collimated beam diameter and divergence to the DOE or array input specification; optional spatial filter only if SWaP and alignment burden are accepted.
+3. **Pattern generator** — **either** a static diffractive or holographic optical element (DOE / HOE) **or** a fixed multi-emitter layout (discrete diode modules or, on the IR path, VCSEL + microlens array).
+4. **Output aperture / window** — defines clear diameter, contamination and coating set, and the last controlled optical surface before free-space propagation; must account for zero-order dump or block geometry if a DOE is used (REQ-S-003).
+5. **Vibration isolation mount interface** — elastomer or soft-mount interface to the host hard point; **does not** replace the need to measure pattern wander under host vibration spectra (R-VIB-001). Isolation is mitigation only until T-05 or equivalent data exists.
+
+**Explicitly out of scope for this minimal stack (Phase 0):** internal gimbal, galvo/MEMS/AO steering, adaptive optics, and real-time pattern update. Those add moving parts, control loops, and failure modes without validated engagement gain at the planned 2–10 W optical class.
+
+#### DOE vs multi-emitter (including VCSEL array) — decision criteria
+
+Down-select is **not** a paper trade. The following axes must be scored with bench evidence.
+
+| Criterion | Static DOE / HOE + single quality source | Fixed multi-emitter (discrete modules) | VCSEL + microlens array (NIR secondary path) |
+|-----------|------------------------------------------|------------------------------------------|-----------------------------------------------|
+| **Complexity** | One driver, one alignment stack, one interlock path; adds custom or semi-custom DOE procurement and zero-order handling | N drivers, N alignment degrees of freedom, wiring and thermal paths scale with N | Array drive, per-emitter uniformity, microlens alignment; often **worse** beam quality per watt for long-range dazzle |
+| **Thermal load** | Concentrated waste heat at single module + DOE absorption; duty-cycle and sink sizing dominate | Heat distributed but **summed** electrical draw still scales with N | VCSEL density → hot spots, wavelength drift, lobe power imbalance under soak **unvalidated** |
+| **Vibration sensitivity** | Single rigid chain: jitter translates to whole-pattern wander and inter-beamlet registration error | Per-emitter boresight drift and relative registration error compound | Coarse lobes may mask small-scale jitter but **do not** prove stable dazzle on cm-class apertures at range |
+| **Producibility** | Custom DOE lead time and single-source risk (R-SUP-001) | Higher part count, simpler optics per channel; alignment labor **likely** higher than one DOE stack | COTS arrays available; pattern uniformity and safety case for invisible NIR **not** demonstrated in this program |
+| **Pattern stability under drone motion** | Fixed angular FOV at boresight; thermal and mechanical drift move entire grid and zero-order (R-DOE-001) | Fixed lobes if emitters stay aligned; **higher risk** of relative drift vs one DOE substrate | Flood or coarse multi-lobe; **does not** guarantee denial (R-EFF-001) |
+
+**Conservative read:** DOE wins on driver count and bench repeatability **if** zero-order is measured and contained before full power. Multi-emitter wins **only if** DOE supply or zero-order risk blocks schedule **and** alignment drift is shown acceptable on vibration table. VCSEL array remains a **secondary / IR-oriented** path.
+
+#### Current down-select recommendation (Phase 0)
+
+| Path | Status | Phase 0 feasibility rationale |
+|------|--------|----------------------------------|
+| **Static DOE / HOE + single 532 nm-class source** | **Primary** | One electrical channel and one safety case; static pattern matches **no** closed-loop tracking; pattern verifiable on bench (irradiance map, zero-order dump) |
+| **Fixed array of 3–9 discrete visible emitters** | **Acceptable alternate** | Admissible if DOE procurement or zero-order measurement fails gate (R-SUP-001, REQ-S-003) |
+| **VCSEL + microlens NIR flood** | **Secondary only** | Weak Phase 0 sole architecture; filtered-surrogate failure modes (R-EFF-001) |
+
+**Rejected as Phase 0 primary:** Galvo, MEMS, and acousto-optic scanning — moving parts without measured static-pattern miss-rate justification (R-TRK-001).
+
+#### Explicit gaps (do not paper over)
+
+- **No fabricated DOE or VCSEL array has been tested.** Pattern geometry, diffraction efficiency, and zero-order fraction are planning assumptions from vendor-class literature, not measured on this optical layout.
+- **Pattern fidelity under representative vibration spectra and thermal drift remains unvalidated.** Bench-static alignment does not bound spot wander, inter-beamlet registration error, or zero-order leakage growth under VTOL/prop harmonics, gust, or maneuver (R-VIB-001).
+
 #### Recommended next actions (beam delivery / pattern)
 
 1. Down-select **DOE/holographic splitter vs fixed multi-emitter** using SWaP, zero-order safety, and supplier lead time (R-SUP-001).
