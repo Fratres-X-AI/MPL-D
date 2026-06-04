@@ -26,7 +26,7 @@
 
 ## Current status
 
-**Maturity:** Preliminary Design. Supporting evidence: Trade studies, 940 nm leading candidate, optical stack, procurement list, pulse/interlock spec, and Phase 0 gates documented. **No hardware procured, no NHZ completed, no bench test data.**
+**Maturity:** Phase 0 — G-DOC pass; G-ENR blocked. Supporting evidence: safety case draft, SOP draft, gate tracker, analytical pre-check. **No LSO approval, no hardware, no bench tests executed.**
 
 ---
 
@@ -34,7 +34,7 @@
 
 | Path | Contents |
 |------|----------|
-| [`docs/`](docs/) | Architecture, requirements, risk register, roadmap, physics basis |
+| [`docs/`](docs/) | Architecture, requirements, risks, roadmap, [gate status](docs/phase0_gate_status.md), [safety case draft](docs/phase0_safety_case_draft.md) |
 | [`analysis/`](analysis/) | First-order power/thermal script, beam propagation notes, [940 nm link budget notes](analysis/nir_940nm_link_budget_notes.md) |
 | [`hardware/`](hardware/) | Interface spec; [candidate components](hardware/candidate_components.md); [procurement list](hardware/phase0_procurement_list.md); [optical layout](hardware/preliminary_optical_layout.md); [pulse control](hardware/pulse_control_spec.md); [surrogate sensors](hardware/surrogate_sensor_procurement.md) |
 | [`tests/`](tests/) | Phase 0 bench test plan outline (no flight test in initial scope) |
@@ -63,10 +63,10 @@ This repository describes defensive, non-kinetic sensor denial concepts only. It
 
 Naming hygiene for MPL-D internal codename is complete in repository headers and navigation. Program baseline is **Preliminary Design — Phase 0 preparation**. Prioritized next steps:
 
-1. **Assign LSO; complete NHZ** for 940 nm + DOE stack (G-SAF-01/02 in `docs/ARCHITECTURE.md`).
-2. **Execute P0 procurement** per [`hardware/phase0_procurement_list.md`](hardware/phase0_procurement_list.md).
-3. **Run Phase 0 T-01–T-03** with three-class surrogates per [`hardware/surrogate_sensor_procurement.md`](hardware/surrogate_sensor_procurement.md).
-4. **Populate R-EFF-001 / R-VIB-001** with measured bench data before claiming Phase 0 progress toward exit.
+1. **Assign named LSO** — sign [`docs/lso_assignment_record.md`](docs/lso_assignment_record.md), [`docs/phase0_safety_case_draft.md`](docs/phase0_safety_case_draft.md), [`tests/phase0_bench_sop_draft.md`](tests/phase0_bench_sop_draft.md).
+2. **Order P0 hardware** — update [`hardware/procurement_status.md`](hardware/procurement_status.md).
+3. **ALIGN-power commissioning** — zero-order checklist; then T-01.
+4. **Do not claim T-02 complete** until power meter data logged — analytical report is pre-check only.
 
 ---
 

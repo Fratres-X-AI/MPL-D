@@ -447,11 +447,14 @@ NIR and visible architectures require **separate** hazard cases if both are benc
 
 | Gate | Criterion | Status (this repo) |
 |------|-----------|---------------------|
-| G-SAF-01 | LSO assigned; scope of authority documented | **Not demonstrated** |
-| G-SAF-02 | IEC 60825-1 classification and **completed NHZ analysis** for the **selected** single-band architecture (visible or NIR) | **Not performed** |
-| G-SAF-03 | Written bench SOP: enable/interlock, alignment low-power protocol, emergency shutdown, eyewear, area control | **Not demonstrated** |
-| G-SAF-04 | Zero-order / stray-order containment defined and inspected if DOE is in path (REQ-S-003) | **Planning only** |
-| G-SAF-05 | Surrogate sensor set defined (minimum three classes per preceding subsection) | **Defined; not procured** |
+| G-DOC | Pre-energization documentation package | **PASS** — see [`phase0_gate_status.md`](phase0_gate_status.md) |
+| G-SAF-01 | LSO assigned; scope of authority documented | **OPEN** — template in [`lso_assignment_record.md`](lso_assignment_record.md) |
+| G-SAF-02 | IEC 60825-1 classification and **completed NHZ analysis** | **OPEN** — draft in [`phase0_safety_case_draft.md`](phase0_safety_case_draft.md); **LSO approval pending** |
+| G-SAF-03 | Written bench SOP | **OPEN** — draft in [`../tests/phase0_bench_sop_draft.md`](../tests/phase0_bench_sop_draft.md); **LSO approval pending** |
+| G-SAF-04 | Zero-order containment defined and inspected | **PARTIAL** — [`../hardware/zero_order_inspection_checklist.md`](../hardware/zero_order_inspection_checklist.md); hardware inspection pending |
+| G-SAF-05 | Surrogate sensor set procured | **OPEN** — spec defined; not purchased |
+| G-HW-P0 | P0 hardware on hand | **OPEN** — [`../hardware/procurement_status.md`](../hardware/procurement_status.md) |
+| G-ENR | Energization above alignment power authorized | **BLOCKED** — requires G-SAF-01/02/03 + G-HW-P0 |
 
 **Blunt constraint:** Low-power alignment, surrogate camera tests at reduced irradiance, and pattern photography **still** require an approved hazard framework. “We will do NHZ later” is **not** a Phase 0 plan — it is an open safety violation waiting for an incident.
 

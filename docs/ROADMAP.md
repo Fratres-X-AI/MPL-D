@@ -1,8 +1,8 @@
 # Development Roadmap — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Preliminary Design (program baseline). **Internal codename:** MPL-D.
+**Maturity:** Phase 0 — documentation gate (G-DOC) **PASS**; bench energization (G-ENR) **BLOCKED**. **Internal codename:** MPL-D.
 
-**Supporting evidence:** Wavelength/power trade study complete; 940 nm leading candidate documented; surrogate sensor set, optical stack layout, procurement list, pulse/interlock spec, and Phase 0 gates defined. **No hardware procured, no NHZ analysis completed, no bench test data.**
+**Supporting evidence:** Safety case draft, SOP draft, gate tracker, analytical T-02 pre-check, procurement status. **No LSO signature, no hardware received, no laser energized.**
 
 **Repository:** https://github.com/Fratres-X-AI/MPL-D (private; authorized access only)
 
@@ -20,41 +20,36 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 | Phase | Name | Duration (placeholder) | Flight test |
 |-------|------|------------------------|-------------|
-| **Current** | Preliminary Design → Phase 0 prep | — | No |
+| **Current** | Phase 0 — pre-energization (G-DOC pass) | — | No |
 | **Phase 0** | Proof-of-Concept (bench) | 3–6 months (resource-dependent) | **No** (explicitly excluded from initial Phase 0 scope) |
 | **Phase 1** | Ground + limited flight integration | 6–12 months (placeholder) | Limited, subject to separate approval |
 
 ---
 
-## Current phase: Preliminary Design (Phase 0 preparation)
+## Current phase: Phase 0 — documentation gate passed; energization blocked
 
-**Objectives:** Complete bench-ready configuration definition — source down-select candidate, optical stack, procurement list, safety gates, and surrogate test matrix — without hardware energization.
+**G-DOC:** **PASS** — [`phase0_gate_status.md`](phase0_gate_status.md)
 
-**Status:** In progress at repository level. Documentation artifacts below exist; **Phase 0 bench execution not started.**
+**Deliverables (this session class):**
 
-**Completed (documentation evidence):**
+- Draft laser safety case (no NHZ distances approved)
+- Draft bench SOP (unsigned)
+- LSO assignment template
+- Zero-order inspection checklist
+- Procurement status tracker (all SPEC)
+- Analytical T-02 pre-check ([`analysis/prebench_t02_analytical_report.md`](../analysis/prebench_t02_analytical_report.md))
 
-- Architecture trade study: laser source, beam delivery, surrogate set, NHZ requirement, cross-cutting risks.
-- Candidate component capture: AeroDiode-class 940 nm path (`hardware/candidate_components.md`).
-- First-order link budgets: generic + 940 nm (`analysis/nir_940nm_link_budget_notes.md`).
-- Phase 0 procurement list, optical layout, pulse control spec, surrogate sensor procurement guide.
-- Risk register preparatory structure for R-EFF-001 / R-VIB-001.
+**Blocked until human/hardware gates:**
 
-**Not complete (blocks Phase 0 energization):**
+- G-SAF-01/02/03 — named LSO + signatures
+- G-HW-P0 — P0 hardware received
+- G-ENR — first laser energization above LSO alignment ceiling
 
-- LSO assigned; NHZ analysis (G-SAF-01, G-SAF-02).
-- Hardware procured and received.
-- Any bench test T-01–T-05 executed.
-
-**Exit criteria to enter Phase 0 bench execution:**
-
-- G-SAF-01 through G-SAF-04 satisfied per `docs/ARCHITECTURE.md`.
-- P0 procurement items on hand (laser, collimator, power meter, eyewear, interlocks).
-- Written SOP approved by LSO.
+**Phase 0 bench tests T-01–T-05:** **Not started** (require G-ENR).
 
 ---
 
-## Prior phase: Concept (closed)
+## Prior phase: Preliminary Design (closed)
 
 **Exit criteria (met):**
 
@@ -164,10 +159,10 @@ Moving past bench testing requires laser safety classification analysis (IEC 608
 
 ## Recommended next actions
 
-1. Assign LSO; complete NHZ for 940 nm + DOE stack (G-SAF-01/02).
-2. Execute P0 procurement per `hardware/phase0_procurement_list.md`.
-3. Run T-01/T-02 at alignment power; measure θ_half before full-power T-03.
-4. Populate R-EFF-001 / R-VIB-001 with bench data — do not advance to Phase 0 exit without measurements.
+1. Assign named LSO; sign safety case + SOP (close G-SAF-01/02/03).
+2. Order P0 hardware per `hardware/procurement_status.md` after export screen.
+3. Energize at ALIGN power only; complete zero-order checklist (G-SAF-04).
+4. Execute hardware T-01–T-05; populate R-EFF-001 / R-VIB-001 with measured data.
 
 ## Open questions / gaps
 
