@@ -1,6 +1,8 @@
 # Development Roadmap — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Concept (this repository state). **Internal codename:** MPL-D.
+**Maturity:** Preliminary Design (program baseline). **Internal codename:** MPL-D.
+
+**Supporting evidence:** Wavelength/power trade study complete; 940 nm leading candidate documented; surrogate sensor set, optical stack layout, procurement list, pulse/interlock spec, and Phase 0 gates defined. **No hardware procured, no NHZ analysis completed, no bench test data.**
 
 **Repository:** https://github.com/Fratres-X-AI/MPL-D (private; authorized access only)
 
@@ -18,23 +20,47 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 | Phase | Name | Duration (placeholder) | Flight test |
 |-------|------|------------------------|-------------|
-| **Current** | Concept | — | No |
+| **Current** | Preliminary Design → Phase 0 prep | — | No |
 | **Phase 0** | Proof-of-Concept (bench) | 3–6 months (resource-dependent) | **No** (explicitly excluded from initial Phase 0 scope) |
 | **Phase 1** | Ground + limited flight integration | 6–12 months (placeholder) | Limited, subject to separate approval |
 
 ---
 
-## Current phase: Concept
+## Current phase: Preliminary Design (Phase 0 preparation)
 
-**Objectives:** Establish auditable preliminary design baseline, requirements, risks, and analysis skeleton.
+**Objectives:** Complete bench-ready configuration definition — source down-select candidate, optical stack, procurement list, safety gates, and surrogate test matrix — without hardware energization.
 
-**Status:** Complete at repository initiation. No hardware, bench data, or validated models.
+**Status:** In progress at repository level. Documentation artifacts below exist; **Phase 0 bench execution not started.**
 
-**Exit criteria (met by this repository):**
+**Completed (documentation evidence):**
+
+- Architecture trade study: laser source, beam delivery, surrogate set, NHZ requirement, cross-cutting risks.
+- Candidate component capture: AeroDiode-class 940 nm path (`hardware/candidate_components.md`).
+- First-order link budgets: generic + 940 nm (`analysis/nir_940nm_link_budget_notes.md`).
+- Phase 0 procurement list, optical layout, pulse control spec, surrogate sensor procurement guide.
+- Risk register preparatory structure for R-EFF-001 / R-VIB-001.
+
+**Not complete (blocks Phase 0 energization):**
+
+- LSO assigned; NHZ analysis (G-SAF-01, G-SAF-02).
+- Hardware procured and received.
+- Any bench test T-01–T-05 executed.
+
+**Exit criteria to enter Phase 0 bench execution:**
+
+- G-SAF-01 through G-SAF-04 satisfied per `docs/ARCHITECTURE.md`.
+- P0 procurement items on hand (laser, collimator, power meter, eyewear, interlocks).
+- Written SOP approved by LSO.
+
+---
+
+## Prior phase: Concept (closed)
+
+**Exit criteria (met):**
 
 - Architecture, requirements, risk register, physics basis, and Phase 0 test outline exist.
 - First-order analysis script present (`analysis/power_thermal_budget.py`).
-- All subsystems labeled Concept maturity with explicit evidence gaps.
+- Initial subsystem maturity labels assigned with explicit evidence gaps.
 
 ---
 
@@ -132,16 +158,16 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 ## Regulatory and safety overhead (blunt statement)
 
-Moving past bench testing requires laser safety classification analysis (IEC 60825-1), potential notification or authorization for outdoor emission, aviation coordination, and review under Protocol IV to the CCW on blinding laser weapons. Export control (ITAR/EAR) may apply depending on final performance parameters and destination. **None of these approvals exist in the Concept repository state.** Phase 0 bench work still requires an LSO and written SOP before any Class 3B or open-beam operation. Flight or field employment is a separate program gate, not an extension of Phase 0.
+Moving past bench testing requires laser safety classification analysis (IEC 60825-1), potential notification or authorization for outdoor emission, aviation coordination, and review under Protocol IV to the CCW on blinding laser weapons. Export control (ITAR/EAR) may apply depending on final performance parameters and destination. **None of these approvals exist in the Preliminary Design repository state.** Phase 0 bench work still requires an LSO and written SOP before any Class 3B or open-beam operation. Flight or field employment is a separate program gate, not an extension of Phase 0.
 
 ---
 
 ## Recommended next actions
 
-1. Select candidate laser wavelength and architecture; update requirements traceability.
-2. Complete laser hazard analysis with LSO before hardware purchase.
-3. Execute Phase 0 Test T-01/T-02 per `tests/phase0_test_plan_outline.md`.
-4. Re-baseline risk register after first bench data.
+1. Assign LSO; complete NHZ for 940 nm + DOE stack (G-SAF-01/02).
+2. Execute P0 procurement per `hardware/phase0_procurement_list.md`.
+3. Run T-01/T-02 at alignment power; measure θ_half before full-power T-03.
+4. Populate R-EFF-001 / R-VIB-001 with bench data — do not advance to Phase 0 exit without measurements.
 
 ## Open questions / gaps
 

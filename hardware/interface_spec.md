@@ -1,7 +1,7 @@
 # Hardware Interface Specification
 
 **Project:** Counter-UAS Multi-Point Laser Dazzler Prototype  
-**Maturity:** Concept. Supporting evidence: Interface parameters are planning placeholders only. No CAD, no measured mass properties, no electrical integration test data.
+**Maturity:** Preliminary Design. Supporting evidence: Interface parameters aligned with 940 nm candidate and LUMIBIRD-class envelope. No CAD, no measured mass properties, no electrical integration test data.
 
 ---
 
@@ -27,7 +27,7 @@ Define preliminary mechanical, electrical, and data interfaces between a host UA
 | Parameter | Planning value | Uncertainty |
 |-----------|----------------|-------------|
 | Mounting | 2× standard drone payload rails or custom 4-bolt plate | Final pattern TBD with host |
-| Module envelope (L×W×H) | 150 × 80 × 60 mm (order of magnitude) | ±30% without detailed layout |
+| Module envelope (L×W×H) | 120 × 45 × 35 mm (LUMIBIRD-class reference) to 180 × 80 × 60 mm (with ram-air scoop) | ±30% without CAD |
 | CG offset from mount | < 20 mm aft of mount plane (target) | Requires CAD |
 | Vibration isolation | 4× elastomer mounts or integrated dampers | Effectiveness unvalidated |
 
@@ -40,8 +40,8 @@ Define preliminary mechanical, electrical, and data interfaces between a host UA
 | Signal / power | Specification (planning) | Notes |
 |----------------|-------------------------|-------|
 | Input voltage | 18–26 V DC (6S LiPo class) or host-defined bus | Must match host BEC/generator capacity |
-| Peak electrical draw | 15–50 W (depends on optical power tier) | See `analysis/power_thermal_budget.py` |
-| Steady-state draw | 5–25 W typical for low-duty dazzle | Duty cycle limits endurance |
+| Peak electrical draw | 20–30 W pulsed (940 nm 10 W class @ η≈0.4) | See `hardware/candidate_components.md`; duty-limited |
+| Steady-state draw | 2–5 W average at 10% duty (planning) | Pulse spec |
 | Control | PWM arm/disarm + UART/CAN command (host-defined) | Interlock required before emitter enable |
 | Ground | Common ground with host; shielded harness for emitters | EMI uncharacterized |
 

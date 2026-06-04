@@ -236,5 +236,34 @@ def example_sweep() -> None:
         print(f"Plot saved: {out_path} (optional; gitignored if regenerated locally)")
 
 
+def example_940nm_doe_sweep() -> None:
+    """
+    940 nm AeroDiode-class candidate with DOE split — see nir_940nm_link_budget_notes.md.
+
+    Planning: P_opt=10 W, N=9, eta_DOE=0.75, theta=1 mrad (mid bracket until measured).
+    """
+    p_opt = 10.0
+    eta_doe = 0.75
+    p_pattern = p_opt * eta_doe
+    n_beams = 9
+    theta_mrad = 1.0
+    theta_rad = theta_mrad * 1e-3
+
+    print("=" * 60)
+    print("940 nm candidate + DOE example (UNVALIDATED)")
+    print("=" * 60)
+    p_elec_nom, _, _ = electrical_power_draw(p_opt, wall_plug_efficiency=0.40)
+    print(f"P_opt={p_opt} W, eta_DOE={eta_doe}, pattern power={p_pattern:.1f} W")
+    print(f"P_elec_peak~{p_elec_nom:.1f} W @ eta_wp=0.40")
+    for r in [50, 100, 500, 1000]:
+        i = effective_irradiance_at_range(
+            p_pattern, float(r), theta_rad, EXTINCTION_CLEAR_KM, n_beams
+        )
+        print(f"  R={r} m  I_beamlet_eff~{i:.4f} W/m2")
+    print("=" * 60)
+
+
 if __name__ == "__main__":
     example_sweep()
+    print()
+    example_940nm_doe_sweep()

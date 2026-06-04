@@ -26,7 +26,7 @@
 
 ## Current status
 
-**Maturity:** Concept. Supporting evidence: No hardware, simulation validation, or test data generated in this repository. All content is preliminary design initiation only.
+**Maturity:** Preliminary Design. Supporting evidence: Trade studies, 940 nm leading candidate, optical stack, procurement list, pulse/interlock spec, and Phase 0 gates documented. **No hardware procured, no NHZ completed, no bench test data.**
 
 ---
 
@@ -36,7 +36,7 @@
 |------|----------|
 | [`docs/`](docs/) | Architecture, requirements, risk register, roadmap, physics basis |
 | [`analysis/`](analysis/) | First-order power/thermal script, beam propagation notes, [940 nm link budget notes](analysis/nir_940nm_link_budget_notes.md) |
-| [`hardware/`](hardware/) | Host–payload interface spec; [candidate NIR components](hardware/candidate_components.md) |
+| [`hardware/`](hardware/) | Interface spec; [candidate components](hardware/candidate_components.md); [procurement list](hardware/phase0_procurement_list.md); [optical layout](hardware/preliminary_optical_layout.md); [pulse control](hardware/pulse_control_spec.md); [surrogate sensors](hardware/surrogate_sensor_procurement.md) |
 | [`tests/`](tests/) | Phase 0 bench test plan outline (no flight test in initial scope) |
 
 MPL-D is used as internal shorthand only. All formal and safety documentation uses the full descriptive title.
@@ -61,12 +61,12 @@ This repository describes defensive, non-kinetic sensor denial concepts only. It
 
 ## Recommended immediate actions
 
-Naming hygiene for MPL-D internal codename is complete in repository headers and navigation. Prioritized next steps:
+Naming hygiene for MPL-D internal codename is complete in repository headers and navigation. Program baseline is **Preliminary Design — Phase 0 preparation**. Prioritized next steps:
 
-1. **Review and expand [`docs/RISK_REGISTER.md`](docs/RISK_REGISTER.md)** with any Fratres X AI domain knowledge or host-platform specifics not captured at Concept initiation.
-2. **Refine laser source trade study** in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) Section 2 — down-select wavelength and DOE vs multi-emitter architecture with datasheet-backed bounds.
-3. **Validate [`analysis/power_thermal_budget.py`](analysis/power_thermal_budget.py)** against a known commercial laser module datasheet (replace assumed η_wp and divergence).
-4. **Draft initial laser safety checklist** from [`tests/phase0_test_plan_outline.md`](tests/phase0_test_plan_outline.md) and assign Laser Safety Officer before procurement.
+1. **Assign LSO; complete NHZ** for 940 nm + DOE stack (G-SAF-01/02 in `docs/ARCHITECTURE.md`).
+2. **Execute P0 procurement** per [`hardware/phase0_procurement_list.md`](hardware/phase0_procurement_list.md).
+3. **Run Phase 0 T-01–T-03** with three-class surrogates per [`hardware/surrogate_sensor_procurement.md`](hardware/surrogate_sensor_procurement.md).
+4. **Populate R-EFF-001 / R-VIB-001** with measured bench data before claiming Phase 0 progress toward exit.
 
 ---
 

@@ -1,7 +1,9 @@
 # MPL-D internal codename | Counter-UAS Multi-Point Laser Dazzler Prototype
 
 **Document:** Phase 0 Test Plan Outline  
-**Maturity:** Concept. Supporting evidence: No test procedures have been executed. This outline supports planning only.
+**Maturity:** Preliminary Design. Supporting evidence: Test cases mapped to procurement list and G-SAF gates. **No tests executed.**
+
+**Prerequisites (see `docs/ARCHITECTURE.md` G-SAF-01–05 and `hardware/phase0_procurement_list.md`):** LSO assigned, NHZ complete, P0 hardware on hand before full-power tests.
 
 **Scope:** Bench-top proof-of-concept for multi-point pattern generation and surrogate sensor exposure measurement. **No flight test** in Phase 0 initial scope. Outdoor testing requires additional regulatory review beyond this outline.
 

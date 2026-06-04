@@ -1,6 +1,6 @@
 # System Architecture — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Concept. Supporting evidence: Architecture description and parameter bounds only. No breadboard, CAD release, or test data.
+**Maturity:** Preliminary Design. Supporting evidence: Wavelength/power trade complete; 940 nm fiber-coupled path documented as leading bench candidate; optical stack, procurement list, pulse control, and surrogate test matrix defined. **No hardware procured, no NHZ completed, no bench measurements.**
 
 **Project objective (verbatim):** Design a practical, drone-mountable (or air-launched) multi-point / pattern laser dazzler system focused on non-kinetic sensor denial against hostile drones. The primary goal is to degrade, blind, or overwhelm electro-optical sensors and cameras on enemy UAS rather than attempting hard-kill burn-through.
 
@@ -56,7 +56,9 @@ flowchart TB
 
 ### Recommended approach
 
-**Phase 0 default path (planning):** One compact **532 nm class** source (DPSS or fiber-coupled visible diode) feeding a static DOE, **or** multiple discrete green diode modules — subject to SWaP, zero-order leakage measurement, and surrogate sensor set definition. NIR down-select remains open until bench evidence defines a visible-band failure mode on defined surrogates.
+**Phase 0 leading path (planning):** **940 nm** AeroDiode-class 10 W fiber module → collimator → static DOE → centerline host mount concept. **532 nm** retained as comparison path if LSO authorizes dual-wavelength bench.
+
+**Prior default (532 nm + DOE):** Still valid for surrogate Class 2 (IR-cut) emphasis — final single-band lock requires three-class surrogate results.
 
 **Rationale:** Commercial availability, moderate wall-plug efficiency, established safety classification paths, and compatibility with COTS beam profiling for Phase 0. Visible wavelength simplifies surrogate camera testing (with acknowledged mismatch to IR-dominant military sensors).
 
@@ -343,16 +345,18 @@ Credible electrical draw, dissipated heat, and duty-cycle limits cannot be state
 | Parameter | Conservative bound | Basis |
 |-----------|-------------------|-------|
 | P_opt (total pattern) | 2–10 W | Drone feasibility |
-| η_wp | 0.15–0.35 | Literature/vendor class |
-| P_elec at 5 W opt, η=0.22 | ~23 W | First-order |
-| Q_diss at 5 W opt | ~18 W | First-order |
-| Duty cycle (small host) | 10–30% average (planning) | Thermal/endurance guess |
+| η_wp | 0.35–0.50 (940 nm candidate typ); 0.15–0.35 (532 nm planning) | Vendor typ vs conservative bound |
+| P_elec at 10 W opt, η=0.40 | ~25 W peak; ~10 W dissipated | AeroDiode-class datasheet typ |
+| P_elec at 5 W opt, η=0.22 | ~23 W | Legacy planning example |
+| Duty cycle (small host / pulsed) | ≤10% avg over 60 s (planning) | `hardware/pulse_control_spec.md` |
 
 **Cooling:** Passive heat sink to free stream air; optional 5–12 V fan (+2–5 W draw). Liquid cooling **rejected** for SWaP.
 
 **Feasibility:** Bench demonstration is feasible on lab power. Continuous full-power operation on small tactical drone is **questionable** without aggressive duty cycling — see R-THM-001.
 
-**Maturity:** Concept. No measured thermal curves.
+**Maturity:** Preliminary Design — thermal and electrical bounds tied to 940 nm candidate and pulse duty planning. No measured thermal curves.
+
+**Reference:** `hardware/pulse_control_spec.md`, `analysis/nir_940nm_link_budget_notes.md`.
 
 ---
 
@@ -364,19 +368,19 @@ An engagement envelope in meters cannot be credibly quantified until source clas
 
 | Target sensor class | Planning assessment | Evidence |
 |--------------------|---------------------|----------|
-| Commercial FPV CMOS (unfiltered, fixed exposure) | Bench dazzle likely at tens of meters; hundreds of meters **unvalidated** at 5 W multi-point | No program test data |
-| Commercial UAS gimbal camera (AGC) | May auto-attenuate; dazzle duration reduced | Public sensor behavior class |
-| Military/hardened EO/IR (filters) | Effectiveness **unknown** at planned power tier | R-EFF-001 |
+| Commercial FPV CMOS (unfiltered) | Bench dazzle plausible at tens of meters at full beamlet power; **940 nm 9-spot DOE** reduces per-beamlet I — see link budget | First-order model only |
+| IR-cut filtered CMOS | 940 nm may show **no effect**; 532 nm remains candidate for this class | Surrogate Class 2 — **test required** |
+| NIR-augmented / Starvis-class | 940 nm **may** couple; threshold unknown | Surrogate Class 3 — **test required** |
 
 **Conservative envelope (planning only, ±order of magnitude):**
 
-- **Possible surrogate bench effect:** 1–20 m (Phase 0).
-- **Uncertain outdoor effect:** 50–300 m in clear air against unfiltered sensors — **speculative**.
-- **Unlikely without higher power or narrow tracking:** >500 m against agile filtered targets.
+- **940 nm single-beam (10 W, θ=1 mrad, clear air):** ~0.19 W/m² at 1000 m — **not** dazzle certification.
+- **940 nm + 9-spot DOE (η=0.75):** per-beamlet I at 500 m ~ **0.07 W/m²** order — coverage vs peak trade.
+- **Outdoor operational envelope:** **unvalidated** beyond surrogate bench (1–20 m Phase 0 target).
 
 Atmospheric and scintillation may reduce bounds further.
 
-**Maturity:** Concept. No range test data.
+**Maturity:** Preliminary Design — range bounds tied to 940 nm first-order model. No range test data.
 
 ---
 
@@ -486,13 +490,13 @@ NIR and visible architectures require **separate** hazard cases if both are benc
 
 | Subsystem | Maturity | Supporting evidence |
 |-----------|----------|---------------------|
-| Laser Source(s) | Preliminary Design | COTS diode/DPSS classes bounded in Section 2 (520–532 nm, 850–1064 nm, 0.5–5 W/module planning); vendor datasheets exist; no system part number, driver, or measured η_wp |
-| Beam Conditioning & Pattern Generation | Preliminary Design | Architecture down-select documented (static DOE/HOE primary; VCSEL NIR secondary); planning divergence 1–5 mrad and pattern FOV 0.5–2°; no DOE design file, alignment stack, or fabricated pattern map |
-| Output Optics & Aperture | Concept | No optical design |
-| Mount & Vibration Isolation | Concept | No CAD |
-| Power Management | Concept | No schematic |
-| Thermal Management | Concept | First-order heat estimate only |
-| Control Electronics & Targeting Interface | Concept | Logical command set only |
+| Laser Source(s) | Preliminary Design | Leading candidate: AeroDiode-class 940 nm 10 W; 915/532 nm alternates bounded; datasheet params in `hardware/candidate_components.md`; **not procured** |
+| Beam Conditioning & Pattern Generation | Preliminary Design | Stack layout in `hardware/preliminary_optical_layout.md`; DOE primary; down-select criteria documented |
+| Output Optics & Aperture | Preliminary Design | Collimator + window + zero-order dump specified at planning level; **not aligned or measured** |
+| Mount & Vibration Isolation | Preliminary Design | Centerline mount concept; elastomer isolation in layout; **no CAD release** |
+| Power Management | Preliminary Design | Driver requirements (≥13 A, interlock) in procurement list; **no schematic** |
+| Thermal Management | Preliminary Design | Ram-air + sink concept; 10 W class dissipation bounds; pulse duty in `pulse_control_spec.md`; **no soak data** |
+| Control Electronics & Targeting Interface | Preliminary Design | Modes, interlocks, pulse profile in `hardware/pulse_control_spec.md`; **no firmware** |
 
 ---
 
@@ -504,13 +508,14 @@ See [`ROADMAP.md`](ROADMAP.md). Phase 0: bench pattern demo, irradiance map, sur
 
 ## Recommended next actions
 
-1. **Define minimum surrogate sensor set** and execute wavelength down-select gate (532 nm DPSS+DOE vs 850–980 nm fiber vs multi-emitter visible) using datasheet-backed budgets.
-2. **Issue preliminary optical stack drawing** and procure candidate DOE or emitter array; execute Phase 0 T-01/T-05 per `tests/phase0_test_plan_outline.md`.
-3. **Commission LSO-led IEC 60825-1 hazard analysis** for selected single-band architecture before full-power bench energization.
-4. **Update risk register** (R-EFF-001, R-VIB-001) with bench-derived likelihoods after first irradiance and vibration data — do not promote system maturity beyond Preliminary Design without thermal and sensor measurements.
+1. **Assign LSO; complete NHZ** for 940 nm + DOE configuration (G-SAF-01/02).
+2. **Execute P0 procurement** per `hardware/phase0_procurement_list.md`; measure collimator θ_half at alignment power.
+3. **Run T-01–T-03** on three-class surrogate set per `hardware/surrogate_sensor_procurement.md`.
+4. **Update R-EFF-001 / R-VIB-001** with T-01/T-05 data — system maturity remains Preliminary Design until Phase 0 exit criteria met.
 
 ## Open questions / gaps
 
-- Surrogate sensor set definition — blocks final wavelength commitment.
+- NHZ and laser classification for pulsed 940 nm multi-beamlet — LSO pending.
 - Host platform confirmation for interface and mass split (Solace payload limit unverified).
-- Static pattern vs R-TRK-001 acceptability — may force Phase 1+ tracking; not resolved at this maturity level.
+- DOE supplier and grid geometry — blocks O-02 order.
+- Static pattern vs R-TRK-001 acceptability — may force Phase 1+ tracking.

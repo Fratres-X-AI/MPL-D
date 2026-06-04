@@ -1,6 +1,6 @@
 # Risk Register — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Concept. Supporting evidence: Risks identified from first principles, public literature classes, and stated project constraints. No test data to adjust likelihood beyond qualitative assessment.
+**Maturity:** Preliminary Design. Supporting evidence: Risks identified from first principles, public literature, trade studies, and Phase 0 gate definitions. R-EFF-001 and R-VIB-001 structured for post-bench quantification. **No test data to adjust likelihood beyond preparatory placeholders.**
 
 **Core uncertainty (explicit):** Many low-power multi-point dazzler concepts have sparse public flight-test validation against operationally relevant threats under dynamic conditions. Effectiveness against filtered, AGC-equipped, or AI-assisted sensors is **not established** in open literature at known power tiers. This is a primary program risk, not a minor documentation gap.
 
