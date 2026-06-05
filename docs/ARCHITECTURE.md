@@ -91,7 +91,7 @@ flowchart TB
 
 **Pros (evidence class, not validated for this system):**
 
-- Strong overlap with unfiltered commercial UAS visible imagers used as Phase 0 surrogates.
+- Direct overlap with many unfiltered commercial UAS visible imagers used as Phase 0 surrogates.
 - Easier bench diagnostics (beam visualization with compliant methods; power meters widely calibrated at 532 nm).
 - Established IEC 60825-1 classification workflows and protective eyewear supply chains at green wavelengths.
 

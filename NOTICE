@@ -1,0 +1,12 @@
+Fratres X AI — MPL-D Prototype Documentation Notice
+
+This repository documents a conceptual / preliminary-design counter-UAS laser
+dazzler study. Documentation maturity labels apply per file; no fielded system
+is implied.
+
+Export control (ITAR/EAR or equivalent) may apply to hardware implementations,
+performance data, or foreign transfer beyond what is published here. Laser
+safety regulations (IEC 60825-1) apply to any energization of laser hardware.
+
+External publication does not authorize bench energization, flight test, or
+operational employment without separate legal, LSO, and program approval.

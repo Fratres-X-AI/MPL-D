@@ -33,7 +33,7 @@
 | REQ-O-001 | Demonstration | T-04 | pulse_control_spec | G-ENR |
 | REQ-O-002 | Analysis | — | RISK_REGISTER R-EFF-001 | G-PROTO |
 
-**G-PROTO:** Elite prototype documentation package complete (this repository session class).
+**G-PROTO:** Prototype documentation package complete (architecture, tests, traceability, analysis scripts).
 
 ---
 

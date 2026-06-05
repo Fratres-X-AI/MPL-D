@@ -11,7 +11,7 @@
 | Gate | Description | Status | Evidence |
 |------|-------------|--------|----------|
 | **G-DOC** | Pre-energization documentation package | **PASS** | Safety case draft, SOP draft, procurement list, optical layout, analytical T-02 pre-check |
-| **G-PROTO** | Elite prototype documentation package complete | **PASS** | [`ELITE_PROTOTYPE_HANDOFF.md`](ELITE_PROTOTYPE_HANDOFF.md) — CONOPS, RTM, electrical/mechanical, firmware design, T-01–T-05 procedures, analysis toolchain |
+| **G-PROTO** | Prototype documentation package complete | **PASS** | [`PROTOTYPE_HANDOFF.md`](PROTOTYPE_HANDOFF.md) — CONOPS, RTM, electrical/mechanical, firmware design, T-01–T-05 procedures, analysis toolchain |
 | **G-SAF-01** | LSO assigned | **OPEN** | [`lso_assignment_record.md`](lso_assignment_record.md) — template only; no named LSO |
 | **G-SAF-02** | NHZ analysis complete + LSO approved | **OPEN** | [`phase0_safety_case_draft.md`](phase0_safety_case_draft.md) — **DRAFT**; not approved |
 | **G-SAF-03** | Bench SOP LSO-approved | **OPEN** | [`../tests/phase0_bench_sop_draft.md`](../tests/phase0_bench_sop_draft.md) — **DRAFT** |
@@ -25,7 +25,7 @@
 ## Phase state machine
 
 ```
-Preliminary Design (closed) → Phase 0 prep (closed) → Phase 0 doc gate G-DOC (PASS) → Elite prototype package G-PROTO (PASS)
+Preliminary Design (closed) → Phase 0 prep (closed) → Phase 0 doc gate G-DOC (PASS) → Prototype documentation G-PROTO (PASS)
   → Phase 0 bench execution G-ENR (BLOCKED — LSO + hardware)
   → Phase 0 exit (future — T-01–T-05 measured data)
 ```

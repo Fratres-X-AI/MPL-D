@@ -28,6 +28,16 @@ analysis/*.png
 analysis/*.csv
 analysis/output/
 
+# Node / frontend (LaserDazzlerHero preview)
+node_modules/
+.next/
+dist/
+*.tsbuildinfo
+
+# Large local binaries (keep repo under practical clone size)
+*.zip
+*.7z
+
 # IDE / OS
 .idea/
 .vscode/

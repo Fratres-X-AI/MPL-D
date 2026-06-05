@@ -30,13 +30,13 @@ MPL-D is used as internal shorthand only. All formal and safety documentation us
 
 **G-DOC:** **PASS** — [`phase0_gate_status.md`](phase0_gate_status.md)
 
-**Deliverables (G-PROTO — elite prototype package):**
+**Deliverables (G-PROTO — prototype documentation package):**
 
 - CONOPS, export screening, requirements traceability matrix
 - Electrical architecture, mechanical BOM, firmware pulse controller design
 - Analysis: thermal_pulse_model, vibration_wander_model (+ existing link budgets)
 - Detailed T-01–T-05 procedures and test record templates
-- Master handoff: [`ELITE_PROTOTYPE_HANDOFF.md`](ELITE_PROTOTYPE_HANDOFF.md)
+- Master handoff: [`PROTOTYPE_HANDOFF.md`](PROTOTYPE_HANDOFF.md)
 
 **Blocked until human/hardware gates:** G-SAF-01/02/03, G-HW-P0, G-ENR, T-01–T-05 execution.
 
