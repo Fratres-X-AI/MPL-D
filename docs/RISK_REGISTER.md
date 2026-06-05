@@ -2,7 +2,7 @@
 
 **Maturity:** Preliminary Design. **Evidence basis:** First principles, literature classes, gate definitions. **No test-derived likelihood updates.**
 
-**Analysis status:** R-EFF-001 and R-VIB-001 await T-01/T-03/T-05. Residual ratings assume **documented mitigations are executed** — most are **not executed**.
+**Analysis status:** R-EFF-001 and R-VIB-001 await T-01/T-03/T-05. Mitigation **execution** tracked in [`MITIGATION_EXECUTION_LOG.md`](MITIGATION_EXECUTION_LOG.md). Residual ratings assume documented mitigations are executed — most are **not executed**.
 
 **Known gaps:** No quantitative risk model; owners are role placeholders until program staffing assigned.
 

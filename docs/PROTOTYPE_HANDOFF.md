@@ -20,6 +20,15 @@
 | **ICD** | [`ICD_HOST_INTEGRATION.md`](ICD_HOST_INTEGRATION.md) |
 | **RTM** | [`REQUIREMENTS_TRACEABILITY.md`](REQUIREMENTS_TRACEABILITY.md) |
 | **Analysis validation** | [`ANALYSIS_VALIDATION_STATUS.md`](ANALYSIS_VALIDATION_STATUS.md) |
+| **Handoff readiness** | [`HANDOFF_READINESS.md`](HANDOFF_READINESS.md) |
+| **Gap tracker** | [`HANDOFF_GAP_TRACKER.md`](HANDOFF_GAP_TRACKER.md) |
+| **Gate closure plan** | [`GATE_CLOSURE_PLAN.md`](GATE_CLOSURE_PLAN.md) |
+| **Mitigation execution** | [`MITIGATION_EXECUTION_LOG.md`](MITIGATION_EXECUTION_LOG.md) |
+| **NHZ worksheet** | [`NHZ_WORKSHEET_TEMPLATE.md`](NHZ_WORKSHEET_TEMPLATE.md) |
+| **TDP baseline registry** | [`TDP_BASELINE_REGISTRY.md`](TDP_BASELINE_REGISTRY.md) |
+| **Export workflow** | [`EXPORT_DETERMINATION_WORKFLOW.md`](EXPORT_DETERMINATION_WORKFLOW.md) |
+| **Atmospheric / tracking** | [`ATMOSPHERIC_AND_TRACKING_ASSESSMENT.md`](ATMOSPHERIC_AND_TRACKING_ASSESSMENT.md) |
+| **Test execution tracker** | [`../tests/PHASE0_EXECUTION_TRACKER.md`](../tests/PHASE0_EXECUTION_TRACKER.md) |
 | **Laser safety** | [`LASER_SAFETY_PLAN.md`](LASER_SAFETY_PLAN.md) |
 | **ROE / Protocol IV** | [`ROE_PROTOCOL_IV.md`](ROE_PROTOCOL_IV.md) |
 | **Export** | [`EXPORT_CONTROL_SCREENING.md`](EXPORT_CONTROL_SCREENING.md) |

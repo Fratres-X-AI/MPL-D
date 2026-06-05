@@ -24,6 +24,20 @@
 
 ---
 
+## 3. Current determination record
+
+| Field | Value |
+|-------|-------|
+| ITAR jurisdiction | **Undetermined — no ruling obtained** |
+| EAR / ECCN | **Not assigned** |
+| Compliance officer memo | **None on file** |
+| Effective determination date | — |
+| Workflow | [`EXPORT_DETERMINATION_WORKFLOW.md`](EXPORT_DETERMINATION_WORKFLOW.md) |
+
+**Operational rule:** **HOLD** — see workflow Step 3.
+
+---
+
 ## 2. Screening checklist (R-EXP-001)
 
 | ID | Question | Result | Notes |
@@ -36,20 +50,6 @@
 | E6 | ITAR/EAR classification assigned? | **No** | **Gap — compliance officer required** |
 | E7 | Vendor country of origin confirmed? | **No** | Pending procurement |
 | E8 | Technical data packaged for export? | **Not authorized** | This repo may contain controlled data when hardware exists |
-
----
-
-## 3. Current determination (explicit)
-
-| Determination | Status |
-|---------------|--------|
-| ITAR jurisdiction | **Unknown — not ruled** |
-| EAR classification / ECCN | **Unknown — not ruled** |
-| Safe to export laser module | **No — hold** |
-| Safe to share repo with foreign persons | **No — hold pending policy** |
-| Safe to publish on open internet | **Documentation MIT license does not override export law** |
-
-**Outcome:** **HOLD** — no international shipment, no foreign-person technical disclosure without compliance review.
 
 ---
 

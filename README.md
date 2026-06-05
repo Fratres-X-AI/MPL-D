@@ -70,7 +70,11 @@ Full register: [`docs/RISK_REGISTER.md`](docs/RISK_REGISTER.md)
 
 | Done | Still Weak | Risks | Next Steps |
 |------|------------|-------|------------|
-| Doc structure, RTM, ICD stub, TDP tree, safety/ROE/export outlines, gov review guide, CM/data-rights stubs | All analysis unvalidated; LSO/NHZ; hardware; test execution; host ICD | R-EFF, R-EYE, R-VIB, R-TRK residual **High** | Assign LSO; export review; procure P0; T-01 at ALIGN power only |
+| TDP structure + **tdp-baseline-0.1** tag; RTM; gate/gap/execution trackers; NHZ template; CM plan Rev A; mitigation execution log; export workflow; atmospheric/tracking assessment | **Zero tests executed**; LSO/NHZ; hardware; export ruling; 0/22 RTM PASS | 4× residual **High** (R-EFF, R-EYE, R-VIB, R-TRK) | [`GATE_CLOSURE_PLAN.md`](docs/GATE_CLOSURE_PLAN.md) Block A → D |
+
+**Handoff verdict:** Documentation baseline released — **not validated system handoff.** Detail: [`docs/HANDOFF_READINESS.md`](docs/HANDOFF_READINESS.md) · [`docs/HANDOFF_GAP_TRACKER.md`](docs/HANDOFF_GAP_TRACKER.md)
+
+**TDP baseline:** `tdp-baseline-0.1` — [`docs/TDP_BASELINE_REGISTRY.md`](docs/TDP_BASELINE_REGISTRY.md)
 
 ---
 

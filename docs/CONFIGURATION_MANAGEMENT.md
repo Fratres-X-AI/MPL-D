@@ -1,68 +1,105 @@
-# Configuration Management and Version Control
+# Configuration Management Plan — MPL-D
 
-**Document ID:** MPL-D-CM-001  
-**Maturity:** Preliminary Design — process note for repository-based configuration control.
+**Document ID:** MPL-D-CM-001 Rev A  
+**Maturity:** **Released** — formal CM plan for documentation baseline `tdp-baseline-0.1`. Hardware CM activates at G-HW-P0.
 
-**Evidence / analysis status:** Git version history on GitHub (`Fratres-X-AI/MPL-D`). No formal CM board established.
-
-**Known gaps:** No released baseline tag; analysis outputs not pinned to hardware serial numbers; no ECO workflow.
-
-**Next required action:** Tag `tdp-baseline-0.1` after first LSO-signed safety package.
+**Registry:** [`TDP_BASELINE_REGISTRY.md`](TDP_BASELINE_REGISTRY.md)
 
 ---
 
-## 1. Configuration items (CIs)
+## 1. Scope
 
-| CI | Location | Baseline authority |
-|----|----------|-------------------|
-| Documentation package | `/docs`, `/README.md` | Program lead + tech lead |
-| Requirements | `docs/REQUIREMENTS.md`, RTM | Systems engineer |
-| Analysis scripts | `/analysis/*.py` | Analyst; commit hash = run ID |
-| Hardware specs | `/hardware/` | Mechanical/electrical leads |
-| Test procedures | `/tests/` | Test lead + LSO for safety |
-| Firmware design | `/firmware/` | Embedded lead |
+Configuration control for:
 
----
-
-## 2. Version control
-
-- **Tool:** Git; default branch `main`.
-- **Commit policy:** Atomic commits with factual messages; no force-push to `main` without program lead approval.
-- **Analysis reproducibility:** Test records shall cite `git rev-parse HEAD` and script path.
-- **Secrets:** Never commit `.env`, credentials, or export-controlled attachments without clearance — see `.gitignore`.
+- Technical documentation (TDP)  
+- Requirements and RTM  
+- Analysis scripts (version = git commit)  
+- Test procedures and **executed logs** under `tests/logs/`  
+- Hardware specifications (serial/lot when procured)
 
 ---
 
-## 3. Change control (lightweight ECO)
+## 2. Roles
 
-| Change type | Required action |
-|-------------|-----------------|
-| Assumption change | Update `ASSUMPTIONS_AND_CONSTRAINTS.md`, RTM, affected risks |
-| Requirement change | Update REQUIREMENTS.md, RTM, gate impact assessment |
-| Safety-impacting change | LSO review before merge |
-| Analysis model change | Update `ANALYSIS_VALIDATION_STATUS.md`; re-run affected tests when hardware exists |
-| ICD change | Rev letter increment; notify host interface owner |
-
-**ECO record:** Git commit + PR description until formal tool adopted.
+| Role | CM responsibility |
+|------|-------------------|
+| Program Lead | Baseline release authority; ECO approval |
+| Systems Engineer | RTM sync; assumption register |
+| Test Lead | Test log integrity; PHASE0_EXECUTION_TRACKER |
+| LSO | Safety-impacting ECO veto |
+| Compliance Officer | Export-controlled artifact control |
 
 ---
 
-## 4. Baseline tagging (planned)
+## 3. Version control scheme
 
-| Tag | Criteria | Status |
-|-----|----------|--------|
-| `tdp-baseline-0.1` | G-DOC + G-PROTO pass (current) | **Eligible now** — tag optional |
-| `tdp-baseline-0.2` | G-SAF-01/02/03 pass | **Not met** |
-| `tdp-baseline-1.0` | Phase 0 exit + test records | **Not met** |
+| Item | Scheme |
+|------|--------|
+| Documentation | Semantic TDP baseline tags on git (`tdp-baseline-x.y`) |
+| Document revisions | Git commit hash; major docs carry Document ID + Rev in header |
+| Analysis scripts | Commit hash recorded in every test log |
+| Test evidence | Folder per test ID; immutable after sign-off (new run = new subfolder) |
+| Hardware | Serial/lot in procurement_status + test logs when received |
 
----
-
-## 5. Analysis artifact control
-
-Generated outputs (`analysis/*.csv`, `analysis/*.png`) are **gitignored**. Canonical results shall be stored in controlled test logs under `tests/logs/` when created, with reference to input commit and parameter file.
+**Branch policy:** `main` is controlled; changes via commit with factual message; no force-push without Program Lead approval.
 
 ---
 
-## 6. Visual / hero assets
+## 4. Baseline release process
 
-Schematic hero assets are **non-operational** configuration items. Drone/airframe renders in `/assets` are **archived reference only** — not baseline for external TDP release (C-VIS-01).
+1. Verify gate criteria for target baseline ([`TDP_BASELINE_REGISTRY.md`](TDP_BASELINE_REGISTRY.md)).  
+2. Program Lead approves release memo (commit message or `docs/cm/releases/` note).  
+3. Apply annotated git tag: `git tag -a tdp-baseline-x.y -m "..."`.  
+4. Update registry table with date, commit hash, validation level.  
+5. Notify reviewers via [`HANDOFF_READINESS.md`](HANDOFF_READINESS.md) update.
+
+### Released baselines
+
+| Tag | Commit | Validation | Status |
+|-----|--------|------------|--------|
+| `tdp-baseline-0.1` | (see registry) | Documentation only | **RELEASED** |
+
+---
+
+## 5. Engineering Change Order (ECO)
+
+| ECO type | Required approvals | Records |
+|----------|-------------------|---------|
+| Doc / req change | Systems Engineer + Program Lead | Git commit; RTM row update |
+| Safety impact | + LSO | MITIGATION_EXECUTION_LOG |
+| Analysis model | Analyst + Systems Engineer | ANALYSIS_VALIDATION_STATUS |
+| ICD / interface | Integration Lead + Host vendor | ICD rev letter |
+| Hardware config | EE/ME leads + Program Lead | procurement_status |
+
+**ECO ID format:** `ECO-YYYYMMDD-###` in commit body until formal tool adopted.
+
+---
+
+## 6. Test log CM
+
+- Executed tests **shall not** overwrite prior logs — use dated subfolders e.g. `T-01/2026-06-15_run1/`.  
+- `PHASE0_EXECUTION_TRACKER.md` is the master index — only Test Lead updates PASS/FAIL.  
+- RTM evidence column updated only when tracker shows PASS with log path.
+
+---
+
+## 7. Analysis outputs
+
+`analysis/*.csv` and `analysis/*.png` remain gitignored. Canonical analysis tied to tests lives in `tests/logs/` with script commit hash.
+
+---
+
+## 8. Excluded from baseline tdp-baseline-0.1 validation
+
+- All content under `tests/logs/` except structure/README  
+- Any fabricated or synthetic test data  
+- Archived drone hero assets (reference only)
+
+---
+
+## 9. Next baseline targets
+
+| Tag | Gate to close |
+|-----|---------------|
+| tdp-baseline-0.2 | G-SAF-01/02/03 |
+| tdp-baseline-1.0 | Phase 0 exit per ROADMAP |

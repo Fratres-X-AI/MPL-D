@@ -76,7 +76,7 @@ MPL-D-TDP/
 
 | TDP section | Status | Gap |
 |-------------|--------|-----|
-| 00 Admin | **Done** (docs) | No formal TDP baseline number |
+| 00 Admin | **Done** (docs) | Baseline **tdp-baseline-0.1 released** — see TDP_BASELINE_REGISTRY |
 | 01 System | **Still Weak** | ICD host drawings missing |
 | 02 Requirements | **Done** (trace forward) | Zero verification evidence |
 | 03 Design | **Still Weak** | No CAD, no released drawings |

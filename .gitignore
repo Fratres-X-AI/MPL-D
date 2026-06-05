@@ -54,8 +54,12 @@ Thumbs.db
 credentials.json
 secrets/
 
-# Local test logs
-tests/logs/
+# Local test logs — ignore data files; structure README/.gitkeep tracked
+tests/logs/**/*
+!tests/logs/
+!tests/logs/**/
+!tests/logs/**/README.md
+!tests/logs/**/.gitkeep
 *.log
 
 # NOTE: This repository may contain sensitive prototype information.
