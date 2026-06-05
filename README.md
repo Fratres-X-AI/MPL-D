@@ -5,9 +5,9 @@
 **Attribution:** Fratres X AI — Defense Prototype Documentation  
 **Repository:** https://github.com/Fratres-X-AI/MPL-D (private)
 
-![Concept hero — Drone-X with flashlight-style MPL-D dazzler (not CAD, not performance-validated)](assets/hero-drone-x-flashlight-dazzler.png)
+![Concept hero — MPL-D emitter module and multi-point beam pattern engaging EO sensor target (schematic, not CAD, not performance-validated)](assets/hero-laser-dazzler-emitter-schematic.png)
 
-*Conceptual cinematic render based on [`assets/reference-drone-x-airframe.png`](assets/reference-drone-x-airframe.png). Forward cone illustrates “point the host like a flashlight at the target sensor”; internal multi-point DOE may appear as structure inside the cone. Not engineering drawing.*
+*Schematic illustration: compact emitter/optics assembly, multi-point NIR beam delivery, and simplified EO sensor focal plane. No host platform or airframe depicted. Not an engineering drawing.*
 
 ---
 
