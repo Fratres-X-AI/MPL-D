@@ -45,3 +45,13 @@ Preliminary Design (closed) → Phase 0 prep (closed) → Phase 0 doc gate G-DOC
 
 - LSO identity and authority chain within Fratres X AI.
 - Lab location and regulatory jurisdiction for indoor laser ops.
+
+---
+
+## Military handoff references
+
+| Document | Purpose |
+|----------|---------|
+| [`GOVERNMENT_REVIEW_GUIDE.md`](GOVERNMENT_REVIEW_GUIDE.md) | Reviewer reading order |
+| [`TDP_STRUCTURE.md`](TDP_STRUCTURE.md) | Technical data package tree |
+| [`PROTOTYPE_HANDOFF.md`](PROTOTYPE_HANDOFF.md) | Master handoff index |

@@ -1,163 +1,156 @@
 # Development Roadmap — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Phase 0 — documentation gate (G-DOC) **PASS**; bench energization (G-ENR) **BLOCKED**. **Internal codename:** MPL-D.
+**Maturity:** Phase 0 pre-energization — G-DOC **PASS**, G-PROTO **PASS**, G-ENR **BLOCKED**.
 
-**Supporting evidence:** Safety case draft, SOP draft, gate tracker, analytical T-02 pre-check, procurement status. **No LSO signature, no hardware received, no laser energized.**
+**Evidence / analysis status:** Documentation and analysis scripts complete. **No LSO signature, no hardware, no tests executed.**
 
-**Repository:** https://github.com/Fratres-X-AI/MPL-D (private; authorized access only)
+**Known gaps:** Phase 1 and Phase 2 **not authorized** — criteria listed for planning only.
 
----
-
-## Handoff criteria (repository standard)
-
-After this session the repository must allow a new engineer or reviewer to immediately understand (a) exact current maturity level of every major element, (b) all assumptions and their uncertainty bounds, (c) the complete risk picture with evidence basis, and (d) a prioritized, actionable list of next engineering tasks to reach a bench-testable Phase 0 configuration. The state must be usable for planning without requiring reverse-engineering of the documents.
-
-MPL-D is used as internal shorthand only. All formal and safety documentation uses the full descriptive title.
+**Next required action:** Close G-SAF-01/02/03; procure P0 (G-HW-P0); begin T-01 at alignment power.
 
 ---
 
-## Phase overview
+## Phase map
 
-| Phase | Name | Duration (placeholder) | Flight test |
-|-------|------|------------------------|-------------|
-| **Current** | Phase 0 — pre-energization (G-DOC pass) | — | No |
-| **Phase 0** | Proof-of-Concept (bench) | 3–6 months (resource-dependent) | **No** (explicitly excluded from initial Phase 0 scope) |
-| **Phase 1** | Ground + limited flight integration | 6–12 months (placeholder) | Limited, subject to separate approval |
-
----
-
-## Current phase: Phase 0 — documentation gate passed; energization blocked
-
-**G-DOC:** **PASS** — [`phase0_gate_status.md`](phase0_gate_status.md)
-
-**Deliverables (G-PROTO — prototype documentation package):**
-
-- CONOPS, export screening, requirements traceability matrix
-- Electrical architecture, mechanical BOM, firmware pulse controller design
-- Analysis: thermal_pulse_model, vibration_wander_model (+ existing link budgets)
-- Detailed T-01–T-05 procedures and test record templates
-- Master handoff: [`PROTOTYPE_HANDOFF.md`](PROTOTYPE_HANDOFF.md)
-
-**Blocked until human/hardware gates:** G-SAF-01/02/03, G-HW-P0, G-ENR, T-01–T-05 execution.
+| Phase | Name | Authorization | Flight | Maturity target |
+|-------|------|---------------|--------|-----------------|
+| **Complete** | Preliminary Design | Closed | No | Preliminary Design ✓ |
+| **Current** | Phase 0 — bench POC | G-ENR blocked | **No** | Implemented & Tested (bench) — **not reached** |
+| **Future** | Phase 1 — ground / limited flight | **Not authorized** | If separately approved | Validated (subsystems) — **not planned active** |
+| **Future** | Phase 2 — engineering validation | **Not authorized** | Possible | Validated — **not planned active** |
 
 ---
 
-## Prior phase: Preliminary Design (closed)
+## Phase 0 — Proof of concept (bench)
 
-**Exit criteria (met):**
+### Entry criteria (met)
 
-- Architecture, requirements, risk register, physics basis, and Phase 0 test outline exist.
-- First-order analysis script present (`analysis/power_thermal_budget.py`).
-- Initial subsystem maturity labels assigned with explicit evidence gaps.
+- [x] Architecture, requirements, RTM, risk register exist
+- [x] Safety case draft, SOP draft, test procedures T-01–T-05
+- [x] Analysis scripts and validation status documented
+- [x] G-DOC PASS, G-PROTO PASS
 
----
+### Entry criteria (not met — blocks execution)
 
-## Phase 0: Proof-of-Concept (bench only)
+- [ ] G-SAF-01 LSO assigned
+- [ ] G-SAF-02 NHZ complete and approved
+- [ ] G-SAF-03 SOP LSO-approved
+- [ ] G-HW-P0 hardware on hand
+- [ ] G-ENR energization authorized
 
 ### Objectives
 
-1. Demonstrate multi-point optical pattern generation on bench.
-2. Measure irradiance vs range and compare to first-order model (document deviation; do not force fit).
-3. Capture surrogate camera image degradation under controlled bench exposure.
-4. Log electrical power and thermal behavior vs duty cycle.
-5. Execute basic vibration table test to quantify beam wander sensitivity.
+1. Multi-point pattern on bench (T-01)
+2. Irradiance vs range vs model (T-02)
+3. Surrogate camera degradation (T-03)
+4. Power/thermal vs duty (T-04)
+5. Vibration sensitivity (T-05)
 
-### Key activities
+### Exit criteria
 
-| Activity | Output |
-|----------|--------|
-| Component procurement (emitters, DOE or array, drivers, optics) | Procurement list with datasheet links |
-| Laser safety case + SOP | LSO-approved bench procedure |
-| Bench optical alignment | Pattern photos + irradiance map |
-| Surrogate sensor exposure tests | Raw images + exposure metadata |
-| Power/thermal logging | CSV logs; updated thermal model |
-| Vibration table test | Displacement vs frequency plot |
-| Documentation update | Revised docs with measured bounds |
+| Criterion | Evidence artifact | Responsible party |
+|-----------|-------------------|-------------------|
+| Pattern documented 2–10 m | T-01 record + photos | Test lead |
+| Irradiance within ±50% of model OR model revised | T-02 log | Analyst |
+| Qualitative surrogate saturation only | T-03 images | Test lead |
+| No thermal runaway 10 min duty test | T-04 log | Thermal lead |
+| Vibration wander quantified | T-05 log | Mechanical lead |
+| RTM updated with evidence links | REQUIREMENTS_TRACEABILITY | Systems |
+| Risk register updated (R-EFF, R-VIB) | RISK_REGISTER | Systems |
+| LSO safety package signed | G-SAF-02/03 | **LSO** |
 
-### Success metrics (Phase 0)
+### Explicit exclusions
 
-- Multi-point pattern observed and documented at 2–10 m bench range.
-- Measured irradiance within **±50% of first-order model** OR model updated with measured divergence/efficiency and uncertainty stated.
-- Surrogate camera shows **qualitative** saturation/bleeding at bench distance — **no operational range claim**.
-- No uncontrolled thermal runaway during 10-minute duty-cycle test at planned power.
-- Risk register updated with test-derived likelihood adjustments where evidence exists.
+Flight test; outdoor emission; threat targets; operational range claims; closed-loop tracking.
 
-### Explicit exclusions (Phase 0 initial scope)
+### Duration (placeholder)
 
-- Flight test on any UAV platform.
-- Closed-loop track-to-dazzle integration.
-- Operational engagement against non-surrogate targets.
-- Claims of effectiveness against military-hardened sensors.
-
-### Resources required
-
-| Resource | Need |
-|----------|------|
-| Optics / laser lab | Controlled access bench |
-| Laser Safety Officer | Mandatory |
-| Optics engineer | Alignment and DOE characterization |
-| Electrical engineer | Driver, interlock, logging |
-| ~$5k–$25k parts budget (rough order of magnitude) | Highly configuration-dependent; not validated |
-
-### Dependencies
-
-- Wavelength and emitter architecture selection (`docs/ARCHITECTURE.md`).
-- LSO approval before energization.
-- Surrogate camera and calibrated power meter procurement.
-
-### Phase 0 exit / handoff criteria
-
-- Updated docs incorporating bench data where available.
-- Validated first-order power/thermal model against measurements (or documented failure to match with revised assumptions).
-- Risk register updated with test-derived likelihoods where applicable.
-- Draft laser safety plan and instrumentation list finalized from outline.
-- Prioritized component procurement list for Phase 1 integration (if pursued).
-- Quantified performance envelope with **explicit uncertainty statements** — no point estimates without bounds.
-- **Naming consistency verified** (MPL-D internal shorthand only; full title used in all safety and requirements artifacts).
+3–6 months after G-ENR — resource-dependent, **not committed**.
 
 ---
 
-## Phase 1: Integrated ground and limited flight test (outline only)
+## Phase 1 — Integrated ground and limited flight (outline — not authorized)
+
+### Entry criteria
+
+- [ ] Phase 0 exit criteria met
+- [ ] ICD Rev A with host vendor (or waiver documented)
+- [ ] Program authorization for ground integration
+- [ ] Legal/regulatory review for any outdoor/flight laser emission
+- [ ] Export control determination updated if config changed
 
 ### Objectives
 
-- Integrate payload mockup on surrogate ground platform and optionally limited flight on authorized test range.
-- Measure beam stability under real prop/rotor vibration (not vibration table alone).
-- Assess power bus interaction with host avionics.
+- Payload mockup on ground platform; optional hover flight on authorized range
+- Beam stability under prop/rotor vibration (beyond vibe table)
+- Power bus / EMI characterization with host
 
-### Success metrics (indicative — not committed)
+### Exit criteria (indicative)
 
-- Payload remains within host mass/power budget with documented duty cycle.
-- No safety interlock failures in scripted ground tests.
-- Flight test (if authorized): beam pattern stable within quantified wander bounds at hover — **engagement effectiveness still not claimed**.
+| Criterion | Evidence |
+|-----------|----------|
+| Mass/power within host budget | Measured log + host sign-off |
+| Interlock fail-safe demonstrated | Test record |
+| Flight segment (if done): pattern wander within quantified bounds | Flight log — **no effectiveness claim** |
 
-### Dependencies
+### Responsible parties (TBD)
 
-- Phase 0 exit criteria met.
-- Host platform interface confirmed (`hardware/interface_spec.md`).
-- Regulatory and airworthiness review for flight segment.
-- ROE and legal review for field laser emission.
+Integration lead, host vendor, LSO, airworthiness authority as applicable.
 
-### Duration placeholder
+### Duration (placeholder)
 
-6–12 months after Phase 0 completion; highly uncertain.
-
----
-
-## Regulatory and safety overhead (blunt statement)
-
-Moving past bench testing requires laser safety classification analysis (IEC 60825-1), potential notification or authorization for outdoor emission, aviation coordination, and review under Protocol IV to the CCW on blinding laser weapons. Export control (ITAR/EAR) may apply depending on final performance parameters and destination. **None of these approvals exist in the Preliminary Design repository state.** Phase 0 bench work still requires an LSO and written SOP before any Class 3B or open-beam operation. Flight or field employment is a separate program gate, not an extension of Phase 0.
+6–12 months after Phase 0 — **highly uncertain**.
 
 ---
 
-## Recommended next actions
+## Phase 2 — Engineering validation (outline — not authorized)
 
-1. Assign named LSO; sign safety case + SOP (close G-SAF-01/02/03).
-2. Order P0 hardware per `hardware/procurement_status.md` after export screen.
-3. Energize at ALIGN power only; complete zero-order checklist (G-SAF-04).
-4. Execute hardware T-01–T-05; populate R-EFF-001 / R-VIB-001 with measured data.
+### Entry criteria
 
-## Open questions / gaps
+- [ ] Phase 1 exit (if Phase 1 executed)
+- [ ] Program decision to pursue threat-representative testing
+- [ ] Legal/ROE/Protocol IV review for expanded scope
+- [ ] Export and safety approvals for test articles
 
-- Program decision on whether Phase 1 flight test is authorized at all.
-- Host platform **Drone-X** (10 kg payload baseline) — hardpoint interface still open (R-INT-001).
+### Objectives
+
+- Threat-representative or government-furnished sensor testing (if approved)
+- Environmental campaign (selected conditions)
+- Reliability / duty cycle validation
+- Updated effectiveness bounds with uncertainty — **still not operational fielding**
+
+### Exit criteria (indicative)
+
+Documented test report with bounded performance envelope; updated TDP baseline; risk register with measured residual ratings; **no fielding without separate program gate**.
+
+---
+
+## Regulatory overhead (all phases)
+
+IEC 60825-1, aviation rules, Protocol IV, ITAR/EAR — **none resolved** at Preliminary Design. See [`LASER_SAFETY_PLAN.md`](LASER_SAFETY_PLAN.md), [`EXPORT_CONTROL_SCREENING.md`](EXPORT_CONTROL_SCREENING.md), [`ROE_PROTOCOL_IV.md`](ROE_PROTOCOL_IV.md).
+
+---
+
+## Gate cross-reference
+
+| Gate | Phase | Status |
+|------|-------|--------|
+| G-DOC | Pre-Phase 0 | PASS |
+| G-PROTO | Pre-Phase 0 | PASS |
+| G-SAF-* | Phase 0 entry | OPEN |
+| G-HW-P0 | Phase 0 entry | OPEN |
+| G-ENR | Phase 0 execution | BLOCKED |
+| Phase 0 exit | → Phase 1 consideration | Not met |
+| Phase 1 authorization | — | **Not granted** |
+| Phase 2 authorization | — | **Not granted** |
+
+Full table: [`phase0_gate_status.md`](phase0_gate_status.md)
+
+---
+
+## Next steps
+
+1. Assign LSO — G-SAF-01
+2. Complete NHZ + SOP — G-SAF-02/03
+3. Procure P0 — G-HW-P0
+4. Execute T-01–T-05 — Phase 0 exit

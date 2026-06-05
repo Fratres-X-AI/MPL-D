@@ -1,6 +1,13 @@
 # System Architecture — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Preliminary Design. Supporting evidence: Wavelength/power trade complete; 940 nm fiber-coupled path documented as leading bench candidate; optical stack, procurement list, pulse control, and surrogate test matrix defined. **No hardware procured, no NHZ completed, no bench measurements.**
+**Document ID:** MPL-D-ARCH-001  
+**Maturity:** Preliminary Design. **Evidence:** Wavelength/power trade documented; 940 nm fiber path leading candidate; optical stack, procurement, pulse control, surrogate matrix defined. **No hardware procured, no NHZ completed, no bench measurements.**
+
+**Traceability:** [`REQUIREMENTS_TRACEABILITY.md`](REQUIREMENTS_TRACEABILITY.md) · [`ASSUMPTIONS_AND_CONSTRAINTS.md`](ASSUMPTIONS_AND_CONSTRAINTS.md) · [`ICD_HOST_INTEGRATION.md`](ICD_HOST_INTEGRATION.md) · Deliverable 1 in [`README.md`](../README.md)
+
+**Known gaps:** Fabricated DOE untested; host ICD open (R-INT-001); dazzle effectiveness unvalidated (R-EFF-001).
+
+**Next required action:** Issue optical stack drawing baseline; procure P0 after export screen.
 
 **Project objective (verbatim):** Design a practical, drone-mountable (or air-launched) multi-point / pattern laser dazzler system focused on non-kinetic sensor denial against hostile drones. The primary goal is to degrade, blind, or overwhelm electro-optical sensors and cameras on enemy UAS rather than attempting hard-kill burn-through.
 

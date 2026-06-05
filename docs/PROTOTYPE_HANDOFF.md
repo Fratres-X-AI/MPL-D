@@ -1,11 +1,33 @@
 # Prototype Package — Handoff Index
 
 **Project:** Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)  
-**Package maturity:** **Preliminary Design — documentation package complete; bench execution pending LSO + hardware.**
+**Package maturity:** **Preliminary Design — military handoff documentation structure complete; bench execution blocked (G-ENR).**
 
-**What this package is:** An auditable design baseline, safety draft package, test procedures, analysis toolchain, BOM, and traceability for Phase 0 bench execution.
+**What this package is:** Auditable TDP-oriented baseline for government or prime technical review — requirements, RTM, ICD stub, safety/compliance outlines, analysis inventory, test procedures, risk register with residual ratings.
 
-**What this package is not:** A fielded weapon, a validated dazzler, or LSO-approved laser operation.
+**What this package is not:** A fielded weapon, validated dazzler, capability proposal, or LSO-approved laser operation.
+
+---
+
+## Military handoff document index
+
+| Category | Document |
+|----------|----------|
+| **Start here** | [`GOVERNMENT_REVIEW_GUIDE.md`](GOVERNMENT_REVIEW_GUIDE.md) |
+| **TDP tree** | [`TDP_STRUCTURE.md`](TDP_STRUCTURE.md) |
+| **Executive summary** | [`../README.md`](../README.md) |
+| **Assumptions** | [`ASSUMPTIONS_AND_CONSTRAINTS.md`](ASSUMPTIONS_AND_CONSTRAINTS.md) |
+| **ICD** | [`ICD_HOST_INTEGRATION.md`](ICD_HOST_INTEGRATION.md) |
+| **RTM** | [`REQUIREMENTS_TRACEABILITY.md`](REQUIREMENTS_TRACEABILITY.md) |
+| **Analysis validation** | [`ANALYSIS_VALIDATION_STATUS.md`](ANALYSIS_VALIDATION_STATUS.md) |
+| **Laser safety** | [`LASER_SAFETY_PLAN.md`](LASER_SAFETY_PLAN.md) |
+| **ROE / Protocol IV** | [`ROE_PROTOCOL_IV.md`](ROE_PROTOCOL_IV.md) |
+| **Export** | [`EXPORT_CONTROL_SCREENING.md`](EXPORT_CONTROL_SCREENING.md) |
+| **Risks** | [`RISK_REGISTER.md`](RISK_REGISTER.md) |
+| **Roadmap** | [`ROADMAP.md`](ROADMAP.md) |
+| **CM** | [`CONFIGURATION_MANAGEMENT.md`](CONFIGURATION_MANAGEMENT.md) |
+| **Data rights** | [`DATA_RIGHTS.md`](DATA_RIGHTS.md) |
+| **Gates** | [`phase0_gate_status.md`](phase0_gate_status.md) |
 
 ---
 
@@ -13,43 +35,24 @@
 
 | Layer | Status | Evidence |
 |-------|--------|----------|
-| Architecture & trade | **Complete (paper)** | ARCHITECTURE.md, candidate_components |
-| Optical design (paper) | **Complete (paper)** | preliminary_optical_layout, mechanical_bom |
-| Electrical / control (paper) | **Complete (paper)** | electrical_architecture, pulse_controller_design |
-| Analysis toolchain | **Complete (scripts)** | power_thermal_budget, thermal_pulse_model, vibration_wander_model, nir link budget |
-| Safety draft package | **Complete unsigned** | safety_case, SOP, LSO template, zero-order checklist |
-| Test package | **Complete (procedures)** | T-01–T-05 procedures, templates, SOP |
-| Traceability | **Complete (matrix)** | REQUIREMENTS_TRACEABILITY, REQUIREMENTS |
+| Architecture & traceability | **Done (paper)** | ARCHITECTURE, ASSUMPTIONS, ICD, RTM |
+| Optical / mechanical / electrical (paper) | **Done (paper)** | hardware/, firmware design |
+| Analysis toolchain | **Still Weak** | Scripts exist; **all unvalidated** |
+| Safety / compliance outlines | **Still Weak** | Plans exist; **LSO/NHZ/export ruling open** |
+| Test package | **Done (procedures)** | T-01–T-05; **zero execution records** |
 | Gates | G-DOC **PASS**, G-PROTO **PASS**, G-ENR **BLOCKED** | phase0_gate_status |
-
----
-
-## Document map
-
-| Need | File |
-|------|------|
-| Executive summary | [`../README.md`](../README.md) |
-| Why / how employed | [`CONOPS.md`](CONOPS.md) |
-| System design | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
-| Req ↔ test | [`REQUIREMENTS_TRACEABILITY.md`](REQUIREMENTS_TRACEABILITY.md) |
-| Buy list | [`../hardware/phase0_procurement_list.md`](../hardware/phase0_procurement_list.md) |
-| Order status | [`../hardware/procurement_status.md`](../hardware/procurement_status.md) |
-| Run bench safely | [`../tests/phase0_bench_sop_draft.md`](../tests/phase0_bench_sop_draft.md) |
-| Run tests | [`../tests/procedures/`](../tests/procedures/) |
-| Models | [`../analysis/`](../analysis/) |
-| Gates | [`phase0_gate_status.md`](phase0_gate_status.md) |
 
 ---
 
 ## Human-only remaining work
 
-1. Name and sign LSO — close G-SAF-01/02/03.
-2. Procure P0 — close G-HW-P0.
-3. Energize at ALIGN — close G-SAF-04 inspection.
-4. Execute T-01–T-05 — progress toward Phase 0 exit.
+1. Assign LSO — G-SAF-01
+2. NHZ + signed SOP — G-SAF-02/03
+3. Procure P0 — G-HW-P0
+4. Execute T-01–T-05; update RTM and risks with measured evidence only
 
 ---
 
-## Limitation statement (non-negotiable)
+## Limitation statement
 
-All range, dazzle effectiveness, and engagement claims remain **unvalidated** until bench and (if authorized) field data exist. Documentation completeness does not imply hardware readiness or operational clearance.
+Documentation completeness does not imply hardware readiness, operational clearance, export authorization, or dazzle effectiveness against threat systems.

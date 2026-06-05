@@ -1,31 +1,80 @@
-# Export Control Screening — Phase 0 Configuration
+# Export Control Screening — MPL-D
 
-**Maturity:** Preliminary Design — screening checklist only. **Not legal advice. Not a license determination.**
+**Document ID:** MPL-D-EXP-001  
+**Maturity:** Preliminary Design — screening checklist and status record. **Not legal advice. Not a license determination.**
 
-**Configuration screened:** 940 nm fiber-coupled ~10 W class diode; pulsed dazzler bench prototype; US/EU vendor supply chain assumption.
+**Evidence / analysis status:** Configuration screened at paper level (940 nm ~10 W class fiber module; pulsed bench prototype; US/EU vendor assumption).
 
----
+**Determination status:** **NO ITAR/EAR RULING OBTAINED.** **HOLD** on international shipment and foreign-person access until compliance officer review.
 
-## Screening checklist (R-EXP-001)
+**Known gaps:** No ECCN assigned; no commodity jurisdiction request; no integrated system classification.
 
-| Item | Question | Phase 0 status |
-|------|----------|----------------|
-| E1 | Is optical power ≥ 10 W CW rated? | **Yes** — triggers careful review |
-| E2 | Is wavelength military-exclusive? | **No** — 940 nm commercial industrial |
-| E3 | Foreign national access to repo? | Program policy TBD |
-| E4 | Integration data with military platform? | Concept only — Drone-X hardpoint/power tap details not in repo |
-| E5 | Dual-use sensor denial purpose documented? | **Yes** — CONOPS defensive |
-| E6 | ITAR/EAR classification assigned? | **No** — compliance officer required |
-
-**Outcome:** **Hold** — export compliance review required before shipping laser module internationally or sharing with foreign persons.
+**Next required action:** Fratres X AI compliance officer review before P0 laser module order or foreign disclosure.
 
 ---
 
-## Recommended next actions
+## 1. Configuration screened
 
-1. Fratres X AI compliance review before AeroDiode or equivalent order.
-2. Document country of origin and ECCN if vendor provides.
+| Parameter | Value |
+|-----------|-------|
+| Laser | 940 nm fiber-coupled ~10 W CW rated (AeroDiode-class candidate) |
+| Purpose documented | Defensive EO sensor denial (CONOPS) |
+| Integration data | Drone-X concept only — hardpoint **not** in repo |
+| Performance claims in repo | Planning estimates only — no validated range |
 
-## Open questions / gaps
+---
 
-- Final integrated system classification unknown until build configuration frozen.
+## 2. Screening checklist (R-EXP-001)
+
+| ID | Question | Result | Notes |
+|----|----------|--------|-------|
+| E1 | Optical power ≥ 10 W CW rated? | **Yes** | Triggers careful review — not automatic ITAR |
+| E2 | Military-exclusive wavelength? | **No** | 940 nm industrial/commercial class |
+| E3 | Foreign national repo access? | **TBD** | Program policy required |
+| E4 | Military platform integration drawings released? | **No** | Concept text only |
+| E5 | Defensive purpose documented? | **Yes** | CONOPS, ROE doc |
+| E6 | ITAR/EAR classification assigned? | **No** | **Gap — compliance officer required** |
+| E7 | Vendor country of origin confirmed? | **No** | Pending procurement |
+| E8 | Technical data packaged for export? | **Not authorized** | This repo may contain controlled data when hardware exists |
+
+---
+
+## 3. Current determination (explicit)
+
+| Determination | Status |
+|---------------|--------|
+| ITAR jurisdiction | **Unknown — not ruled** |
+| EAR classification / ECCN | **Unknown — not ruled** |
+| Safe to export laser module | **No — hold** |
+| Safe to share repo with foreign persons | **No — hold pending policy** |
+| Safe to publish on open internet | **Documentation MIT license does not override export law** |
+
+**Outcome:** **HOLD** — no international shipment, no foreign-person technical disclosure without compliance review.
+
+---
+
+## 4. Recommended next actions
+
+| # | Action | Owner | Target artifact |
+|---|--------|-------|-----------------|
+| 1 | Compliance officer review of this screening + CONOPS | Compliance | Written hold/release memo |
+| 2 | Obtain vendor ECCN / country of origin on PO | Procurement | procurement_status update |
+| 3 | Define repo access policy (private vs partner) | Program lead | CONFIGURATION_MANAGEMENT |
+| 4 | Re-screen if optical power, wavelength, or integration data changes | Systems | Updated EXP-001 rev |
+
+---
+
+## 5. Traceability
+
+| Requirement | Link |
+|-------------|------|
+| REQ-R-003 | This document |
+| Risk | R-EXP-001 |
+
+**Related:** [`DATA_RIGHTS.md`](DATA_RIGHTS.md) · [`ROE_PROTOCOL_IV.md`](ROE_PROTOCOL_IV.md)
+
+---
+
+## 6. Statement for government reviewers
+
+Fratres X AI has **not** obtained a U.S. government or export authority ruling on this configuration. Evaluators should treat export status as **indeterminate** until a compliance determination is issued and filed here.

@@ -1,8 +1,26 @@
 # Physics Basis — Counter-UAS Multi-Point Laser Dazzler Prototype (MPL-D)
 
-**Maturity:** Concept. Supporting evidence: First-order analytical equations only. No Monte Carlo propagation, no hardware validation, no sensor response models.
+**Maturity:** Concept / Preliminary Design (equations only). **Evidence:** First-order analytical relations. **No Monte Carlo, no hardware validation, no sensor response models.**
 
-**Purpose:** Document the physics assumptions underlying range, irradiance, atmospheric, and thermal estimates in this repository. All numerical examples are conservative planning bounds, not performance guarantees.
+**Validation status:** See [`ANALYSIS_VALIDATION_STATUS.md`](ANALYSIS_VALIDATION_STATUS.md) — all quantitative examples **unvalidated**.
+
+**Known gaps:** Dazzle threshold not modeled; turbulence omitted; η_wp and θ are bracket assumptions.
+
+**Next required action:** Replace bracket parameters with measured values after T-01/T-02.
+
+---
+
+## Uncertainty quantification (all numerical examples)
+
+| Quantity | Planning value | Uncertainty band | Dominant sensitivity |
+|----------|----------------|------------------|----------------------|
+| θ_half | 1 mrad (example) | **0.5–3 mrad** (multimode) | Irradiance ∝ θ⁻² |
+| η_wp | 0.40 nominal | **0.35–0.50** (940 nm) | Q_diss |
+| η_DOE | 0.75 (example) | **0.60–0.85** vendor-class | Per-beamlet power |
+| σ (clear air) | 0.1 km⁻¹ | **0.05–0.2** | I_eff at range |
+| Combined I_eff @ 500 m | ~0.8 W/m² (example) | **±order of magnitude** | θ, unmeasured |
+
+**Rule:** Any single-point value in this document is a **planning anchor**, not a specification limit.
 
 ---
 
